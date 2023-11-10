@@ -6,9 +6,9 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: 'localhost', // 指定监听的IP地址
+    host: '0.0.0.0', // 指定监听的IP地址
     port: 3333, // 指定服务器端口
-    open: true, // 开发服务器启动时，自动在浏览器打开
+    open: 'http://192.168.10.208:3333', // 开发服务器启动时，自动在浏览器打开
     strictPort: false, // 设为 true 时，若端口已被占用会直接退出，不会尝试下一个可用端口
     https: false, // 是否开启 https 服务
     cors: true, // 允许跨域
