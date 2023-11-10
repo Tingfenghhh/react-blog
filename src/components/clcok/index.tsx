@@ -48,19 +48,21 @@ function Clocks() {
   }, []);
   return (
     <>
-      <Header />
-      <MainContainer
-        backgroundColor={state.theme === 'light' ? '#f7f7f7' : '#0e0e0e'}
-      >
-        <Block number={SwitchNumber(clock?.hour[0] || '0')} />
-        <Block number={SwitchNumber(clock?.hour[1] || '0')} />
-        <Separator />
-        <Block number={SwitchNumber(clock?.minute[0] || '0')} />
-        <Block number={SwitchNumber(clock?.minute[1] || '0')} />
-        <Separator />
-        <Block number={SwitchNumber(clock?.second[0] || '0')} />
-        <Block number={SwitchNumber(clock?.second[1] || '0')} />
-      </MainContainer>
+      <div>
+        <Header />
+        <MainContainer
+          backgroundColor={state.theme === 'light' ? '#f7f7f7' : '#0e0e0e'}
+        >
+          <Block number={SwitchNumber(clock?.hour[0] || '0')} />
+          <Block number={SwitchNumber(clock?.hour[1] || '0')} />
+          <Separator />
+          <Block number={SwitchNumber(clock?.minute[0] || '0')} />
+          <Block number={SwitchNumber(clock?.minute[1] || '0')} />
+          <Separator />
+          <Block number={SwitchNumber(clock?.second[0] || '0')} />
+          <Block number={SwitchNumber(clock?.second[1] || '0')} />
+        </MainContainer>
+      </div>
     </>
   );
 }
