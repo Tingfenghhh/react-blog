@@ -1,11 +1,16 @@
+import { FC } from 'react';
 import Squer from './components/squer';
 
-function FramerMotion() {
+interface FramerMotionProps {
+  backgroundColor?: string;
+}
+
+const FramerMotion: FC<FramerMotionProps> = () => {
   return (
     <>
-      <Squer />
+      <Squer backgroundColor='#339a14bf' />
     </>
   );
-}
+};
 
 export default FramerMotion;

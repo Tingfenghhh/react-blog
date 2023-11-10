@@ -1,14 +1,10 @@
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import RotateBox from './rotate-box';
+import { FC } from 'react';
+interface props {
+  backgroundColor: string;
+}
 
-const RotateBox = styled(motion.div)`
-  width: 100px;
-  height: 100px;
-  background-color: #339a14;
-  border-radius: 20px;
-`;
-
-const Squer = () => (
+const Squer: FC<props> = ({ backgroundColor }) => (
   <RotateBox
     animate={{
       x: 50,
@@ -18,6 +14,7 @@ const Squer = () => (
       opacity: 0.5,
     }}
     transition={{ duration: 0.5 }}
+    backgroundColor={backgroundColor}
   />
 );
 
