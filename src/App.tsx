@@ -1,35 +1,45 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import { ConfigProvider } from '@arco-design/web-react';
+import Login from '@/pages/login';
+import Home from '@/pages/home';
+import Notfund from '@/pages/Notfund';
+import { Provider } from 'react-redux';
+import { store } from '@/store';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    // 路由模式
+    <HashRouter>
+      {/* Arco的全局参数注入 */}
+      <ConfigProvider
+        componentConfig={{
+          Button: {
+            shape: 'square',
+            style: {
+              borderRadius: '5px',
+            },
+          },
+          Card: {
+            bordered: false,
+          },
+          List: {
+            bordered: false,
+          },
+          Table: {
+            border: false,
+          },
+        }}
+      >
+        <Provider store={store}>
+          <Routes>
+            <Route path='/' Component={Login} />
+            <Route path='/home' Component={Home} />
+            <Route path='*' Component={Notfund} />
+          </Routes>
+        </Provider>
+      </ConfigProvider>
+    </HashRouter>
   );
-}
+};
 
 export default App;

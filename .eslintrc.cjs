@@ -17,7 +17,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['react-refresh', '@typescript-eslint'],
+  plugins: ['react-refresh', '@typescript-eslint', 'react'],
   rules: {
     semi: 'off', // 不强制在语句末尾使用分号。
     'arrow-body-style': 'off', // 不强制在箭头函数体周围使用大括号。
@@ -44,6 +44,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    // react/no-array-index-key
+    'react/no-array-index-key': 'warn',
   },
   settings: {
     //自动检测React的版本，从而进行规范代码。
