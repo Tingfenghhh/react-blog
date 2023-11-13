@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from '@arco-design/web-react';
 import Login from '@/pages/login';
 import Home from '@/pages/home';
+import Select from '@/pages/select';
 import Notfund from '@/pages/Notfund';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
@@ -34,6 +35,7 @@ const App = () => {
           <Routes>
             <Route path='/' Component={Login} />
             <Route path='/home' Component={Home} />
+            <Route path='/select' Component={Select} />
             <Route path='*' Component={Notfund} />
           </Routes>
         </Provider>

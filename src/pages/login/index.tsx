@@ -11,6 +11,12 @@ const login = () => {
         <Button type='primary' onClick={() => (window.location.hash = '/home')}>
           登录
         </Button>
+        <Button
+          type='primary'
+          onClick={() => (window.location.hash = '/select')}
+        >
+          select
+        </Button>
       </Space>
     </>
   );

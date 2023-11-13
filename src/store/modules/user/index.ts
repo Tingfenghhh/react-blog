@@ -3,21 +3,21 @@ import type { RootState } from '../../';
 import { Message } from '@arco-design/web-react';
 
 // 定义 slice state 的类型
-interface CounterState {
+interface UserState {
   value: number;
   name: string;
   price: number;
 }
 
 // 使用该类型定义初始 state
-const initialState: CounterState = {
+const initialState: UserState = {
   value: 0,
   name: 'zxd',
   price: 10,
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     increment: (state, action: PayloadAction<number>) => {
@@ -41,9 +41,9 @@ export const counterSlice = createSlice({
 });
 
 export const { increment, decrement, incrementByAmount, changeName } =
-  counterSlice.actions;
+  userSlice.actions;
 
 // selectors 等其他代码可以使用导入的 `RootState` 类型
-export const selectCount = (state: RootState) => state.counter.value;
+export const selectCount = (state: RootState) => state.user.value;
 
-export default counterSlice.reducer;
+export default userSlice.reducer;
