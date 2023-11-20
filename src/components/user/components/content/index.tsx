@@ -1,19 +1,11 @@
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
+import './index.less';
+import { MyContentBox } from './style';
 import LeftContent from './left-content';
 import { Grid } from '@arco-design/web-react';
 import MiddleContent from './middle-content';
 import RightContent from './right-content';
 
 const { Row, Col } = Grid;
-
-const MyContentBox = styled(motion.div)`
-  width: 100%;
-  height: calc(100vh - 110px);
-  transition: all 0.3s;
-  box-sizing: border-box;
-  padding: 5px 5px;
-`;
 
 function MyContent() {
   return (

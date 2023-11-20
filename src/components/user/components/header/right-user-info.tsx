@@ -1,25 +1,10 @@
-import styled from 'styled-components';
 import { useAppSelector, useAppDispatch } from '@/hooks/redux';
-import { motion } from 'framer-motion';
+
 import { Button } from '@arco-design/web-react';
-import { IconSun, IconMoon } from '@arco-design/web-react/icon';
+
 import { changeTheme } from '@/store/modules/user';
 import { useEffect } from 'react';
-
-const IconSunStyled = styled(IconSun)`
-  color: var(--color-text-1);
-  font-weight: bold;
-`;
-const IconMoonStyled = styled(IconMoon)`
-  color: var(--color-text-1);
-  font-weight: bold;
-`;
-
-const UserInfoMotion = styled(motion.div)`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
+import { IconMoonStyled, IconSunStyled, UserInfoMotion } from './style';
 
 function UserInfo() {
   const dispatch = useAppDispatch();
