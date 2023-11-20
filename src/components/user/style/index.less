@@ -1,9 +1,33 @@
 @import url('../../../assets/style/custom.less');
 
-.header {
-  background-color: red;
-  padding: 5px;
+.header,
+.footer,
+.content {
+  transition: background-color 0.5s ease-in-out;
+}
+
+.header,
+.footer {
+  width: 100%;
+  background-color: var(--color-bg-1);
   height: 40px;
   box-sizing: border-box;
+  .pd-box;
   .display-flex-center;
+}
+
+.content {
+  width: 100%;
+  background-color: var(--color-bg-1);
+  height: calc(100vh - 100px);
+  box-sizing: border-box;
+  overflow: hidden;
+  .display-flex-center;
+  .pd-box;
+}
+
+.header {
+  height: 60px;
+  justify-content: space-between;
+  cursor: pointer;
 }

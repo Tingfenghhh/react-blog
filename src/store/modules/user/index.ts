@@ -7,6 +7,7 @@ interface UserState {
   value: number;
   name: string;
   price: number;
+  theme: string;
 }
 
 // 使用该类型定义初始 state
@@ -14,6 +15,7 @@ const initialState: UserState = {
   value: 0,
   name: 'zxd',
   price: 10,
+  theme: localStorage.getItem('theme') || 'light',
 };
 
 export const userSlice = createSlice({
@@ -37,11 +39,21 @@ export const userSlice = createSlice({
     changeName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
+    changeTheme: (state, action: PayloadAction<string>) => {
+      // 持久化
+      localStorage.setItem('theme', action.payload);
+      state.theme = action.payload;
+    },
   },
 });
 
-export const { increment, decrement, incrementByAmount, changeName } =
-  userSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  changeName,
+  changeTheme,
+} = userSlice.actions;
 
 // selectors 等其他代码可以使用导入的 `RootState` 类型
 export const selectCount = (state: RootState) => state.user.value;

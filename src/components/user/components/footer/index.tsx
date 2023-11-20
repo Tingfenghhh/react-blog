@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import Logo from './left-logo';
-import UserInfo from './right-user-info';
 import { motion } from 'framer-motion';
 
-const HeaderBox = styled(motion.div)`
+const FooterBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -17,16 +15,20 @@ const HeaderBox = styled(motion.div)`
   border-radius: 5px;
   padding: 0 10px;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-1);
   &:hover {
     border: 1px solid var(--color-border-3);
   }
 `;
 
-function MyHeader() {
+function MyFooter() {
   return (
     <>
-      <HeaderBox
-        initial={{ opacity: 0, y: -10 }}
+      <FooterBox
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: 0.3,
@@ -39,11 +41,10 @@ function MyHeader() {
           },
         }}
       >
-        <Logo />
-        <UserInfo />
-      </HeaderBox>
+        <h4>tingfeng</h4>
+      </FooterBox>
     </>
   );
 }
 
-export default MyHeader;
+export default MyFooter;

@@ -6,8 +6,17 @@ import Select from '@/pages/select';
 import Notfund from '@/pages/Notfund';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
+import { useEffect } from 'react';
 
 const App = () => {
+  const theme = localStorage.getItem('theme');
+  useEffect(() => {
+    if (theme !== 'light') {
+      document.body.setAttribute('arco-theme', 'dark');
+      return;
+    }
+    document.body.removeAttribute('arco-theme');
+  }, [theme]);
   return (
     // 路由模式
     <HashRouter>

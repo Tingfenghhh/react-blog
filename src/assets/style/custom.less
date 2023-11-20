@@ -13,10 +13,21 @@ body {
   --border-radius-small: 4px;
   --border-radius-medium: 6px;
   --border-radius-large: 6px;
+  background-color: var(--color-bg-2) !important;
+}
+
+:root {
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
 }
 
 .display-flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.pd-box {
+  padding: 10px 20px;
 }
