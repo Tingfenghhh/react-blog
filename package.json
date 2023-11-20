@@ -53,7 +53,8 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "yarn lint --fix",
-      "npx prettier --write"
+      "npx prettier --write",
+      "git add"
     ],
     "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
       "npx prettier --write--parser json"
