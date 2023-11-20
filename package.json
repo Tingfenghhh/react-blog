@@ -11,6 +11,11 @@
     "preview": "vite preview",
     "prepare": "husky install"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged --allow-empty"
+    }
+  },
   "dependencies": {
     "@arco-design/web-react": "^2.55.1",
     "@reduxjs/toolkit": "^1.9.7",
