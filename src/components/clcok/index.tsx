@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Block, Header, Separator } from './clock';
+import { Block, Separator } from './clock';
 import SwitchNumber from './constants/numbers';
-import { useAppContext } from './context/AppContext';
 
-const MainContainer = styled.div<{ backgroundColor: string }>`
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  height: 100vh;
+const MainContainer = styled.div`
+  background-color: transparent;
+  width: 100%;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,6 @@ interface IClock {
 }
 function Clocks() {
   const [clock, setClock] = useState<IClock>();
-  const { state } = useAppContext();
   useEffect(() => {
     const interval = setInterval(() => {
       const date = new Date();
@@ -49,10 +48,7 @@ function Clocks() {
   return (
     <>
       <div>
-        <Header />
-        <MainContainer
-          backgroundColor={state.theme === 'light' ? '#f7f7f7' : '#0e0e0e'}
-        >
+        <MainContainer>
           <Block number={SwitchNumber(clock?.hour[0] || '0')} />
           <Block number={SwitchNumber(clock?.hour[1] || '0')} />
           <Separator />

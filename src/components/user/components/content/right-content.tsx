@@ -1,4 +1,5 @@
 import { RightBox } from './style';
+import Clocks from '@/components/clcok';
 
 function RightContent() {
   return (
@@ -12,7 +13,9 @@ function RightContent() {
           delay: 0.3,
           ease: [0.29, -0.18, 0.37, 1.01],
         }}
-      ></RightBox>
+      >
+        <Clocks />
+      </RightBox>
     </>
   );
 }

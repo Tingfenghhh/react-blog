@@ -19,7 +19,8 @@
   "dependencies": {
     "@arco-design/web-react": "^2.55.1",
     "@reduxjs/toolkit": "^1.9.7",
-    "axios": "^1.6.1",
+    "axios": "^1.6.2",
+    "axios-hooks": "^5.0.2",
     "framer-motion": "^10.16.4",
     "less": "^4.2.0",
     "react": "^18.2.0",
