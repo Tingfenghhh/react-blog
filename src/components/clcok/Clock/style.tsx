@@ -11,7 +11,7 @@ export const Line = styled.div<{ color: string; rotate: number }>`
   position: absolute;
   z-index: 5;
   width: 2px;
-  height: 5px;
+  height: 6px;
   background: var(--color-text-1);
   right: 50%;
   top: -2%;
@@ -19,25 +19,15 @@ export const Line = styled.div<{ color: string; rotate: number }>`
   transform: rotate(${({ rotate }) => rotate}deg);
   margin-left: -2px;
   transition: all 1s;
-  /* @media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 1900px) {
     & {
-      height: 18px;
+      height: 4px;
     }
   }
-  @media only screen and (max-width: 1150px) {
+  @media only screen and (max-width: 1300px) {
     & {
-      width: 2px;
-      height: 14px;
+      width: 1px;
+      height: 4px;
     }
   }
-  @media only screen and (max-width: 900px) {
-    & {
-      height: 11px;
-    }
-  }
-  @media only screen and (max-width: 700px) {
-    & {
-      height: 9px;
-    }
-  } */
 `;

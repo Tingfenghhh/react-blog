@@ -41,6 +41,7 @@ function MyHeader() {
         transition={{
           duration: 0.3,
           delay: 0.1,
+          ease: [0.29, -0.18, 0.37, 1.01],
         }}
         whileHover={{
           transition: {

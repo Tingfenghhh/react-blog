@@ -25,4 +25,8 @@ const RightBox = styled(motion.div)`
   }
 `;
 
-export { MyContentBox, LeftBox, MiddleBox, RightBox };
+const MotionColock = styled(motion.div)`
+  width: 100%;
+`;
+
+export { MyContentBox, LeftBox, MiddleBox, RightBox, MotionColock };

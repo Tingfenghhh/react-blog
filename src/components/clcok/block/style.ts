@@ -11,37 +11,24 @@ export const Container = styled.div<props>`
   grid-template-rows: repeat(6, 10px);
   align-items: center;
   direction: rtl;
-  /* @media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 1900px) {
     & {
-      grid-template-columns: repeat(${({ separator }) => separator}, 36px);
-      grid-template-rows: repeat(6, 36px);
+      grid-template-columns: repeat(${({ separator }) => separator}, 8px);
+      grid-template-rows: repeat(6, 8px);
     }
   }
-  @media only screen and (max-width: 1150px) {
+  @media only screen and (max-width: 1600px) {
     & {
-      grid-template-columns: repeat(${({ separator }) => separator}, 28px);
-      grid-template-rows: repeat(6, 28px);
+      grid-template-columns: repeat(${({ separator }) => separator}, 6px);
+      grid-template-rows: repeat(6, 6px);
     }
   }
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 1300px) {
     & {
-      grid-template-columns: repeat(${({ separator }) => separator}, 22px);
-      grid-template-rows: repeat(6, 22px);
+      grid-template-columns: repeat(${({ separator }) => separator}, 6px);
+      grid-template-rows: repeat(6, 6px);
     }
   }
-  @media only screen and (max-width: 700px) {
-    & {
-      grid-template-columns: repeat(${({ separator }) => separator}, 18px);
-      grid-template-rows: repeat(6, 18px);
-    }
-  } */
-  /* @media only screen and (max-width: 500px) {
-    & {
-
-      grid-template-columns: repeat(${({ separator }) => separator}, 20px);
-      grid-template-rows: repeat(6, 20px);
-    }
-  } */
 `;
 
 export const fuck = '';
