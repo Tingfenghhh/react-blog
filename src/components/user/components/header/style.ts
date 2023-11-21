@@ -4,7 +4,7 @@ import { IconSun, IconMoon } from '@arco-design/web-react/icon';
 
 const HeaderBox = styled(motion.div)`
   width: 100%;
-  height: 100%;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,12 +12,18 @@ const HeaderBox = styled(motion.div)`
   transition: all 0.3s;
   box-sizing: border-box;
   border: 1px solid var(--color-border-1);
-  background-color: var(--color-fill-2);
-  border-radius: 5px;
+  box-shadow: 3px 2px 10px 0 gray;
+  background-color: transparent !important;
   padding: 0 10px;
   border-radius: 15px;
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
   &:hover {
     border: 1px solid var(--color-border-3);
+    backdrop-filter: blur(10px);
   }
 `;
 
@@ -29,7 +35,6 @@ const LogoMotion = styled(motion.div)`
 const LogoImg = styled.img`
   width: 30px;
   height: 30px;
-  object-fit: cover;
   border-radius: 50%;
 `;
 

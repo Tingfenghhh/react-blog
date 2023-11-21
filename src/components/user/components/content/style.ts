@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const MyContentBox = styled(motion.div)`
   width: 100%;
-  height: calc(100vh - 110px);
   transition: all 0.3s;
   box-sizing: border-box;
   padding: 5px 5px;
@@ -15,7 +14,10 @@ const LeftBox = styled(motion.div)`
   }
 `;
 
-const MiddleBox = styled(motion.div)``;
+const MiddleBox = styled(motion.div)`
+  height: 1800px !important;
+  margin-bottom: 35px;
+`;
 
 const RightBox = styled(motion.div)`
   @media screen and (max-width: 1200px) {

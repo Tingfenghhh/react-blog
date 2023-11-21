@@ -1,4 +1,4 @@
-import { FooterBox } from './style';
+import { FooterBox, FooterSpan } from './style';
 
 function MyFooter() {
   return (
@@ -17,7 +17,7 @@ function MyFooter() {
           },
         }}
       >
-        <h4>tingfeng</h4>
+        <FooterSpan>TingFeng</FooterSpan>
       </FooterBox>
     </>
   );

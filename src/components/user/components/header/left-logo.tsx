@@ -1,5 +1,4 @@
-import logos from '@/assets/images/user/logos.png';
-import { LogoImg, LogoMotion, LogoSpan } from './style';
+import { LogoMotion, LogoSpan } from './style';
 
 function Logo() {
   return (
@@ -14,8 +13,7 @@ function Logo() {
           delay: 0.4,
         }}
       >
-        <LogoImg src={logos} alt='logo' />
-        <LogoSpan>React</LogoSpan>
+        <LogoSpan>Tingfeng</LogoSpan>
       </LogoMotion>
     </>
   );

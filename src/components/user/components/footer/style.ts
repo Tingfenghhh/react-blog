@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const FooterBox = styled(motion.div)`
   width: 100%;
-  height: 100%;
+  height: 40px;
   cursor: pointer;
   transition: all 0.3s;
   box-sizing: border-box;
@@ -20,4 +20,10 @@ const FooterBox = styled(motion.div)`
   }
 `;
 
-export { FooterBox };
+const FooterSpan = styled(motion.span)`
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-text-1);
+`;
+
+export { FooterBox, FooterSpan };

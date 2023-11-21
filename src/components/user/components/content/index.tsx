@@ -1,7 +1,7 @@
 import './index.less';
 import { MyContentBox } from './style';
 import LeftContent from './left-content';
-import { Grid } from '@arco-design/web-react';
+import { Affix, Grid } from '@arco-design/web-react';
 import MiddleContent from './middle-content';
 import RightContent from './right-content';
 
@@ -20,13 +20,17 @@ function MyContent() {
       >
         <Row gutter={24}>
           <Col xl={4}>
-            <LeftContent />
+            <Affix offsetTop={76}>
+              <LeftContent />
+            </Affix>
           </Col>
           <Col xl={16} xs={24}>
             <MiddleContent />
           </Col>
           <Col xl={4}>
-            <RightContent />
+            <Affix offsetTop={76}>
+              <RightContent />
+            </Affix>
           </Col>
         </Row>
       </MyContentBox>
