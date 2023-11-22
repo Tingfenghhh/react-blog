@@ -54,6 +54,7 @@ function MyHeader() {
           left: left,
           backdropFilter: 'blur(8px)',
           boxShadow: boxShadow,
+          transition: ' 0.5s cubic-bezier(0.29, -0.18, 0.37, 1.01)',
         }}
       >
         <Logo />

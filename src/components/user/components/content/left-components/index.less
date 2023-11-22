@@ -1,0 +1,45 @@
+.temperature {
+  font-size: 16px;
+  color: var(--color-text-1);
+}
+
+.weather-box {
+  width: 100%;
+}
+
+.weather-skeleton {
+  display: block !important;
+
+  li {
+    height: 1px !important;
+    border-radius: 5px;
+    margin-bottom: 6px;
+  }
+}
+
+.weather-info-box {
+  border-radius: 15px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  backdrop-filter: blur(10px);
+  .weather-info-top {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .weather-info-top-left-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-start;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .weather-info-top-right {
+    align-items: flex-end;
+  }
+}

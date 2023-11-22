@@ -1,4 +1,6 @@
+import { Button } from '@arco-design/web-react';
 import { MiddleBox } from './style';
+import { Link } from 'react-router-dom';
 
 function MiddleContent() {
   return (
@@ -12,7 +14,18 @@ function MiddleContent() {
           delay: 0.3,
           ease: [0.29, -0.18, 0.37, 1.01],
         }}
-      ></MiddleBox>
+      >
+        <Button>
+          <Link
+            to='/select'
+            style={{
+              textDecoration: 'none',
+            }}
+          >
+            select
+          </Link>
+        </Button>
+      </MiddleBox>
     </>
   );
 }
