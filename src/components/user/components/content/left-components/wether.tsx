@@ -4,10 +4,11 @@ import { useGetLocation } from '@/hooks/useGetLocation';
 import useAxios from 'axios-hooks';
 import { useEffect, useState } from 'react';
 import './index.less';
-import { Skeleton } from '@arco-design/web-react';
+import { Modal, Skeleton } from '@arco-design/web-react';
 import { WeatherSpan } from './style';
 import { IconLocation } from '@arco-design/web-react/icon';
 import { motion } from 'framer-motion';
+import WeatherModal7 from './weather-Modal';
 
 const {
   VITE_API_WEATHER_KEY,
@@ -21,6 +22,8 @@ function Wether() {
   const [cityId, setCityId] = useState('');
   const [iconId, setIconId] = useState('');
   const [nowLoading, setNowLoading] = useState(true);
+  const [visible, setVisible] = useState(false);
+  const [upDateTime, setUpDateTime] = useState(''); // 更新时间
   const isLight = useAppSelector((state) => state.user.theme);
   const getCityName = async () => {
     const ip = await getIp();
@@ -103,7 +106,10 @@ function Wether() {
             }}
           >
             {/* 上部分当日天气 */}
-            <div className={'weather-info-top'}>
+            <div
+              className={'weather-info-top'}
+              onClick={() => setVisible(true)}
+            >
               <div className={'weather-info-top-left-right'}>
                 <WeatherSpan>
                   {data?.location[0].name} <IconLocation />
@@ -133,6 +139,30 @@ function Wether() {
             </div>
           </motion.div>
         </Skeleton>
+
+        <Modal
+          title={upDateTime}
+          visible={visible}
+          onOk={() => setVisible(false)}
+          onCancel={() => setVisible(false)}
+          maskClosable={false}
+          footer={null}
+          style={{
+            backgroundImage:
+              isLight === 'light'
+                ? 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)'
+                : 'linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)',
+          }}
+        >
+          <WeatherModal7
+            cityValue={data ? data?.location[0] : null}
+            weatherValue={nowData ? nowData : null}
+            iconId={iconId}
+            isLight={isLight}
+            visible={visible}
+            setUpDateTime={setUpDateTime}
+          />
+        </Modal>
       </div>
     </>
   );
