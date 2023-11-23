@@ -10,6 +10,7 @@ import { IconLocation } from '@arco-design/web-react/icon';
 import { Variants, motion } from 'framer-motion';
 import WeatherModal7 from './weather-Modal';
 import { DelayTime } from '@/components/user/delay';
+import { getRandomWarmGradient } from '@/hooks/useColor';
 
 const {
   VITE_API_WEATHER_KEY,
@@ -26,6 +27,7 @@ function Wether() {
   const [visible, setVisible] = useState(false);
   const [upDateTime, setUpDateTime] = useState(''); // 更新时间
   const isLight = useAppSelector((state) => state.user.theme);
+  const [bacColor, setBacColor] = useState(''); // 背景颜色
 
   const variants: Variants = {
     light: {
@@ -68,6 +70,10 @@ function Wether() {
   useEffect(() => {
     getCityName();
   }, []);
+
+  useEffect(() => {
+    setBacColor(getRandomWarmGradient(isLight === 'light' ? true : false));
+  }, [isLight]);
 
   useEffect(() => {
     if (cityName) {
@@ -113,10 +119,7 @@ function Wether() {
             drag
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
             style={{
-              backgroundImage:
-                isLight === 'light'
-                  ? 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)'
-                  : 'linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)',
+              backgroundImage: bacColor,
             }}
           >
             {/* 上部分当日天气 */}
@@ -162,10 +165,7 @@ function Wether() {
           maskClosable={false}
           footer={null}
           style={{
-            backgroundImage:
-              isLight === 'light'
-                ? 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)'
-                : 'linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)',
+            backgroundImage: bacColor,
           }}
         >
           <WeatherModal7
