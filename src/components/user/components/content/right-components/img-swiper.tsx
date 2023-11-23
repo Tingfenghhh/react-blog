@@ -12,6 +12,7 @@ import cmd from '@/assets/images/swiper/cmd.png';
 import serda from '@/assets/images/swiper/serda.jpg';
 import { useAppSelector } from '@/hooks/redux';
 import { Variants } from 'framer-motion';
+import { DelayTime } from '@/components/user/delay';
 
 function ImgSwiper() {
   const [swiperContent, setSwiperContent] = useState<
@@ -24,14 +25,14 @@ function ImgSwiper() {
       opacity: [0, 1],
       y: [20, 0],
       transition: {
-        delay: 0.8,
+        delay: DelayTime.delay + 0.2,
       },
     },
     dark: {
       opacity: [0, 1],
       y: [-20, 0],
       transition: {
-        delay: 0.8,
+        delay: DelayTime.delay + 0.2,
       },
     },
   };

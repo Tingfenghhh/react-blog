@@ -3,6 +3,7 @@ import { MotionColock, RightBox } from './style';
 import Clocks from '@/components/clcok';
 import { Variants } from 'framer-motion';
 import ImgSwiper from './right-components/img-swiper';
+import { DelayTime } from '../../delay';
 
 function RightContent() {
   const isLight = useAppSelector((state) => state.user.theme);
@@ -12,14 +13,14 @@ function RightContent() {
       opacity: [0, 1],
       y: [20, 0],
       transition: {
-        delay: 0.5,
+        delay: DelayTime.delay,
       },
     },
     dark: {
       opacity: [0, 1],
       y: [-20, 0],
       transition: {
-        delay: 0.5,
+        delay: DelayTime.delay,
       },
     },
   };

@@ -9,6 +9,7 @@ import { WeatherSpan } from './style';
 import { IconLocation } from '@arco-design/web-react/icon';
 import { Variants, motion } from 'framer-motion';
 import WeatherModal7 from './weather-Modal';
+import { DelayTime } from '@/components/user/delay';
 
 const {
   VITE_API_WEATHER_KEY,
@@ -31,14 +32,14 @@ function Wether() {
       opacity: [0, 1],
       y: [20, 0],
       transition: {
-        delay: 0.8,
+        delay: DelayTime.delay,
       },
     },
     dark: {
       opacity: [0, 1],
       y: [-20, 0],
       transition: {
-        delay: 0.8,
+        delay: DelayTime.delay,
       },
     },
   };
@@ -106,12 +107,7 @@ function Wether() {
         >
           <motion.div
             className={'weather-info-box'}
-            initial={{ opacity: 0 }}
             animate={isLight === 'light' ? 'light' : 'dark'}
-            transition={{
-              duration: 0.5,
-              delay: 0.5,
-            }}
             variants={variants}
             exit={{ opacity: 0 }}
             drag

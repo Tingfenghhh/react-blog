@@ -20,7 +20,7 @@
 .weather-info-box {
   border-radius: var(--border-radius-xlarge);
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: var(--box-padding);
   backdrop-filter: blur(10px);
 
   .weather-info-top {
@@ -67,4 +67,31 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.user-info-skeleton {
+  position: relative;
+}
+
+.user-info-img-skeleton {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  height: 80px;
+  width: 80px;
+  margin-left: -25px;
+}
+
+.user-info-skeleton-1 {
+  margin-top: 70px;
+}
+
+.user-info-li {
+  display: block !important;
+
+  li {
+    height: 25px !important;
+    border-radius: var(--border-radius-xlarge);
+    margin-bottom: 6px;
+  }
 }
