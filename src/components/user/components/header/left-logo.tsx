@@ -1,10 +1,12 @@
+import ProGress from './components/progress';
 import { LogoMotion, LogoSpan } from './style';
 
 function Logo() {
   return (
     <>
       <LogoMotion className='LogoMotion'>
-        <LogoSpan>Tingfeng</LogoSpan>
+        <ProGress />
+        <LogoSpan>欢迎！</LogoSpan>
       </LogoMotion>
     </>
   );

@@ -9,3 +9,23 @@
 .theme-btn {
   color: var(--color-text-1);
 }
+
+.progress-wheel {
+  margin: 0 10px;
+
+  circle {
+    stroke-dashoffset: 0;
+    stroke-width: 30%;
+    fill: none;
+  }
+}
+
+.progress-wheel .bg {
+  stroke: #ffda8c;
+  opacity: 0.35;
+}
+
+.progress-wheel .progress {
+  stroke: #ffda8c;
+  stroke-dasharray: 0, 1;
+}
