@@ -134,11 +134,7 @@ function WeatherModal7({
                           iconId={item.iconDay}
                           fill={isLight === 'light' ? false : true}
                         ></WeatherIcon>
-                        <span>{`${
-                          item.textDay === item.textNight
-                            ? item.textDay
-                            : `${item.textDay}转${item.textNight}`
-                        }`}</span>
+                        <span>{item.textDay}</span>
                         <span>{`${item.tempMin}° - ${item.tempMax}°`}</span>
                       </div>
                     );

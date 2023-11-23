@@ -10,7 +10,7 @@ const FooterBox = styled(motion.div)`
   border: 1px solid var(--color-border-1);
   background-color: var(--color-fill-2);
   padding: 0 10px;
-  border-radius: 15px;
+  border-radius: var(--border-radius-xlarge);
   display: flex;
   align-items: center;
   justify-content: center;

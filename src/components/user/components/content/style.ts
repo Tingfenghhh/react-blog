@@ -8,18 +8,18 @@ const MyContentBox = styled(motion.div)`
   padding: 5px 5px;
 `;
 
-const LeftBox = styled(motion.div)`
+const LeftBox = styled.div`
   @media screen and (max-width: 1200px) {
     display: none;
   }
 `;
 
-const MiddleBox = styled(motion.div)`
+const MiddleBox = styled.div`
   height: 1800px !important;
   margin-bottom: 35px;
 `;
 
-const RightBox = styled(motion.div)`
+const RightBox = styled.div`
   @media screen and (max-width: 1200px) {
     display: none;
   }

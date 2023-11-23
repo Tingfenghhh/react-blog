@@ -2,6 +2,7 @@ import { useAppSelector } from '@/hooks/redux';
 import { MotionColock, RightBox } from './style';
 import Clocks from '@/components/clcok';
 import { Variants } from 'framer-motion';
+import ImgSwiper from './right-components/img-swiper';
 
 function RightContent() {
   const isLight = useAppSelector((state) => state.user.theme);
@@ -25,22 +26,14 @@ function RightContent() {
 
   return (
     <>
-      <RightBox
-        className='content-box'
-        initial={{ opacity: 0, x: 10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.3,
-          ease: [0.29, -0.18, 0.37, 1.01],
-        }}
-      >
+      <RightBox className='content-box'>
+        {/* 时钟 */}
         <MotionColock
           animate={isLight === 'light' ? 'light' : 'dark'}
           variants={variants}
           transition={{
             duration: 0.5,
-            delay: 1,
+            delay: 1.8,
             ease: [0.29, -0.18, 0.37, 1.01],
           }}
           drag
@@ -53,6 +46,8 @@ function RightContent() {
         >
           <Clocks />
         </MotionColock>
+        {/* 图片swiper */}
+        <ImgSwiper />
       </RightBox>
     </>
   );

@@ -28,7 +28,7 @@ function MyHeader() {
     if (isLight === 'dark' && ref.current) {
       setBoxShadow('none');
     } else if (isLight === 'light' && ref.current) {
-      setBoxShadow('0px 0px 20px 0px rgba(0,0,0,0.4)');
+      setBoxShadow('0px 0px 10px 0px rgba(0,0,0,0.4)');
     }
   }, [isLight]);
 
@@ -40,21 +40,13 @@ function MyHeader() {
         animate={{ opacity: 1, y: 0 }}
         transition={{
           duration: 0.3,
-          delay: 0.1,
-          ease: [0.29, -0.18, 0.37, 1.01],
-        }}
-        whileHover={{
-          transition: {
-            duration: 0.6,
-            ease: [0, 0.71, 0.2, 1.01],
-          },
         }}
         style={{
           width: width,
           left: left,
           backdropFilter: 'blur(8px)',
           boxShadow: boxShadow,
-          transition: ' 0.5s cubic-bezier(0.29, -0.18, 0.37, 1.01)',
+          transition: ' 0.3s cubic-bezier(0.29, -0.18, 0.37, 1.01)',
         }}
       >
         <Logo />

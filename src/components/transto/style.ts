@@ -34,7 +34,7 @@ export const ModalContent = styled(motion.div)`
   width: 500px;
   height: 300px;
   background: var(--transColor-1);
-  border-radius: 15px;
+  border-radius: var(--border-radius-xlarge);
   box-sizing: border-box;
   padding: 20px;
 `;

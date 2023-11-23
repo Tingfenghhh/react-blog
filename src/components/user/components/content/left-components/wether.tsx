@@ -7,7 +7,7 @@ import './index.less';
 import { Modal, Skeleton } from '@arco-design/web-react';
 import { WeatherSpan } from './style';
 import { IconLocation } from '@arco-design/web-react/icon';
-import { motion } from 'framer-motion';
+import { Variants, motion } from 'framer-motion';
 import WeatherModal7 from './weather-Modal';
 
 const {
@@ -25,6 +25,23 @@ function Wether() {
   const [visible, setVisible] = useState(false);
   const [upDateTime, setUpDateTime] = useState(''); // 更新时间
   const isLight = useAppSelector((state) => state.user.theme);
+
+  const variants: Variants = {
+    light: {
+      opacity: [0, 1],
+      y: [20, 0],
+      transition: {
+        delay: 0.8,
+      },
+    },
+    dark: {
+      opacity: [0, 1],
+      y: [-20, 0],
+      transition: {
+        delay: 0.8,
+      },
+    },
+  };
   const getCityName = async () => {
     const ip = await getIp();
     const city = await getCity(ip);
@@ -90,11 +107,12 @@ function Wether() {
           <motion.div
             className={'weather-info-box'}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={isLight === 'light' ? 'light' : 'dark'}
             transition={{
               duration: 0.5,
               delay: 0.5,
             }}
+            variants={variants}
             exit={{ opacity: 0 }}
             drag
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}

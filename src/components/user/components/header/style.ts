@@ -15,7 +15,7 @@ const HeaderBox = styled(motion.div)`
   box-shadow: 3px 2px 10px 0 gray;
   background-color: transparent !important;
   padding: 0 10px;
-  border-radius: 15px;
+  border-radius: var(--border-radius-xlarge);
   backdrop-filter: blur(5px);
   position: fixed;
   top: 0;
@@ -27,7 +27,7 @@ const HeaderBox = styled(motion.div)`
   }
 `;
 
-const LogoMotion = styled(motion.div)`
+const LogoMotion = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -54,7 +54,7 @@ const IconMoonStyled = styled(IconMoon)`
   font-weight: bold;
 `;
 
-const UserInfoMotion = styled(motion.div)`
+const UserInfoMotion = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
