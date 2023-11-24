@@ -26,6 +26,25 @@ const App = () => {
       });
       return;
     }
+    const pathArr = path.split('/');
+    if (pathArr.length > 2) {
+      routes.forEach((route) => {
+        if (route.key === pathArr[1]) {
+          route.children?.find((child) => {
+            if (child.key === pathArr[2]) {
+              const preloaad = child.component.preload();
+              NProgress.start();
+              preloaad.then(() => {
+                NProgress.done();
+              });
+            }
+          });
+        }
+      });
+
+      return;
+    }
+
     // 根据routes找到当前路由的key
     const currentRoute = routes.find((route) => {
       return route.key === path.split('/')[1];
@@ -68,20 +87,36 @@ const App = () => {
     >
       <Provider store={store}>
         <AnimatePresence mode='wait'>
-          <Routes key={location.key} location={location}>
+          <Routes location={location}>
             {routes &&
               routes.map((route) => {
                 const Component = route.component;
                 return (
                   <Route
-                    key={route.name}
+                    key={`/${route.key}`}
                     path={`/${route.key}`}
                     element={
                       <Suspense fallback={<LoadingSpin />}>
                         <Component />
                       </Suspense>
                     }
-                  />
+                  >
+                    {route.children &&
+                      route.children.map((child) => {
+                        const ChildComponent = child.component;
+                        return (
+                          <Route
+                            key={`/${route.key}/${child.key}`}
+                            path={`/${route.key}/${child.key}`}
+                            element={
+                              <Suspense fallback={<LoadingSpin />}>
+                                <ChildComponent />
+                              </Suspense>
+                            }
+                          />
+                        );
+                      })}
+                  </Route>
                 );
               })}
             <Route

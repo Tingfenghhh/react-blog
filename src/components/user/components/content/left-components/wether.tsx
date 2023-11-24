@@ -106,7 +106,7 @@ function Wether() {
           loading={nowLoading}
           text={{
             rows: 2,
-            width: ['100%', '100%'],
+            width: '100%',
             className: 'weather-skeleton',
           }}
           animation

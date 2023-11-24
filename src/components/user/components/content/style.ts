@@ -15,10 +15,11 @@ const LeftBox = styled.div`
 `;
 
 const MiddleBox = styled.div`
-  height: 1800px !important;
+  min-height: 100vh;
   margin-bottom: 35px;
   border: 1px solid var(--color-border-1);
   box-shadow: 0px 0px 1px 0 var(--color-border-3);
+  background-color: transparent;
 `;
 
 const RightBox = styled.div`

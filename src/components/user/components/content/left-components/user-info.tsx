@@ -82,7 +82,7 @@ function UserInfo() {
             className={'user-info-skeleton'}
             text={{
               rows: 0,
-              width: ['100%'],
+              width: '100%',
             }}
             animation
             image={{
@@ -101,7 +101,7 @@ function UserInfo() {
             className={'user-info-skeleton user-info-skeleton-1 '}
             text={{
               rows: 5,
-              width: ['100%', '100%', '100%', '100%', '100%'],
+              width: '100%',
               className: 'user-info-li',
             }}
             animation

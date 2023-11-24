@@ -29,3 +29,23 @@
   stroke: #ffda8c;
   stroke-dasharray: 0, 1;
 }
+
+.header-menu {
+  box-sizing: border-box;
+  background-color: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.header-menu-item {
+  width: fit-content;
+}
+
+.header-menu .arco-menu-inner {
+  overflow-y: auto;
+}

@@ -5,7 +5,7 @@ import { Variants } from 'framer-motion';
 import ImgSwiper from './right-components/img-swiper';
 import { DelayTime } from '../../delay';
 
-function RightContent() {
+function RightContent({ show }: { show?: boolean }) {
   const isLight = useAppSelector((state) => state.user.theme);
 
   const variants: Variants = {
@@ -27,7 +27,12 @@ function RightContent() {
 
   return (
     <>
-      <RightBox className='content-box'>
+      <RightBox
+        className='content-box'
+        style={{
+          display: show ? 'block' : '',
+        }}
+      >
         {/* 时钟 */}
         <MotionColock
           animate={isLight === 'light' ? 'light' : 'dark'}

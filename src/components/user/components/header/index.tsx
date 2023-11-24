@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '@/hooks/redux';
 import './index.less';
 import { useMotionValueEvent, useScroll } from 'framer-motion';
+import HeaderMenu from './components/header-menu';
 
 function MyHeader() {
   const ref = useRef(null);
@@ -36,11 +37,6 @@ function MyHeader() {
     <>
       <HeaderBox
         ref={ref}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.3,
-        }}
         style={{
           width: width,
           left: left,
@@ -50,6 +46,7 @@ function MyHeader() {
         }}
       >
         <Logo />
+        <HeaderMenu />
         <UserInfo />
       </HeaderBox>
     </>

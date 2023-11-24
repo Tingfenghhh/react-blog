@@ -4,19 +4,15 @@ import LeftContent from './left-content';
 import { Affix, Grid } from '@arco-design/web-react';
 import MiddleContent from './middle-content';
 import RightContent from './right-content';
+import MiniRightContent from './mini-right-content';
+import MiniLeftContent from './mini-left-content';
 
 const { Row, Col } = Grid;
 
 function MyContent() {
   return (
     <>
-      <MyContentBox
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.5,
-        }}
-      >
+      <MyContentBox>
         <Row gutter={24}>
           <Col xl={4}>
             <Affix offsetTop={76}>
@@ -33,6 +29,8 @@ function MyContent() {
           </Col>
         </Row>
       </MyContentBox>
+      <MiniLeftContent />
+      <MiniRightContent />
     </>
   );
 }

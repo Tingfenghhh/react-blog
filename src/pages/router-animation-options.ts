@@ -2,7 +2,7 @@ import { AnimationProps } from 'framer-motion';
 
 export const RouterAnimationOptions: AnimationProps = {
   initial: {
-    opacity: 0,
+    opacity: 0.5,
     y: 10,
   },
   animate: {
@@ -14,6 +14,6 @@ export const RouterAnimationOptions: AnimationProps = {
     y: -10,
   },
   transition: {
-    duration: 0.3,
+    duration: 0.5,
   },
 };

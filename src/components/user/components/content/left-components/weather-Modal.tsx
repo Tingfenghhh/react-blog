@@ -69,7 +69,7 @@ function WeatherModal7({
         loading={loading}
         text={{
           rows: 5,
-          width: ['85%', '85%', '85%', '85%', '85%', '85%'],
+          width: '100%',
           className: 'weather-skeleton',
         }}
         animation
