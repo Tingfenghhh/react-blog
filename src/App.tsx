@@ -1,15 +1,44 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ConfigProvider } from '@arco-design/web-react';
-import Login from '@/pages/login';
-import Home from '@/pages/home';
-import Select from '@/pages/select';
 import Notfund from '@/pages/Notfund';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import routes from './router';
+import LoadingSpin from './pages/loding';
+
+const Login = routes[0].component;
 
 const App = () => {
   const theme = localStorage.getItem('theme');
+  const location = useLocation();
+  // 路由切换时，进度条
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/') {
+      const preloaad = Login.preload();
+      NProgress.start();
+      preloaad.then(() => {
+        NProgress.done();
+      });
+      return;
+    }
+    // 根据routes找到当前路由的key
+    const currentRoute = routes.find((route) => {
+      return route.key === path.split('/')[1];
+    });
+    if (currentRoute) {
+      const preloaad = currentRoute.component.preload();
+      NProgress.start();
+      preloaad.then(() => {
+        NProgress.done();
+      });
+    }
+  }, [location]);
+
   useEffect(() => {
     if (theme !== 'light') {
       document.body.setAttribute('arco-theme', 'dark');
@@ -18,38 +47,63 @@ const App = () => {
     document.body.removeAttribute('arco-theme');
   }, [theme]);
   return (
-    // 路由模式
-    <HashRouter>
-      {/* Arco的全局参数注入 */}
-      <ConfigProvider
-        componentConfig={{
-          Button: {
-            shape: 'square',
-            style: {
-              borderRadius: '5px',
-            },
+    <ConfigProvider
+      componentConfig={{
+        Button: {
+          shape: 'square',
+          style: {
+            borderRadius: '5px',
           },
-          Card: {
-            bordered: false,
-          },
-          List: {
-            bordered: false,
-          },
-          Table: {
-            border: false,
-          },
-        }}
-      >
-        <Provider store={store}>
-          <Routes>
-            <Route path='/' Component={Login} />
-            <Route path='/home' Component={Home} />
-            <Route path='/select' Component={Select} />
-            <Route path='*' Component={Notfund} />
+        },
+        Card: {
+          bordered: false,
+        },
+        List: {
+          bordered: false,
+        },
+        Table: {
+          border: false,
+        },
+      }}
+    >
+      <Provider store={store}>
+        <AnimatePresence mode='wait'>
+          <Routes key={location.key} location={location}>
+            {routes &&
+              routes.map((route) => {
+                const Component = route.component;
+                return (
+                  <Route
+                    key={route.name}
+                    path={`/${route.key}`}
+                    element={
+                      <Suspense fallback={<LoadingSpin />}>
+                        <Component />
+                      </Suspense>
+                    }
+                  />
+                );
+              })}
+            <Route
+              path='/'
+              element={
+                <Suspense fallback={<LoadingSpin />}>
+                  <Login />
+                </Suspense>
+              }
+            />
+            <Route
+              path='*'
+              element={
+                <Suspense fallback={<LoadingSpin />}>
+                  <Notfund />
+                </Suspense>
+              }
+            />
           </Routes>
-        </Provider>
-      </ConfigProvider>
-    </HashRouter>
+        </AnimatePresence>
+      </Provider>
+    </ConfigProvider>
   );
 };
 
