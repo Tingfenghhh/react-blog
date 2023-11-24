@@ -6,14 +6,6 @@ const routes: IRoute[] = [
     name: 'login',
     key: 'login',
   },
-  {
-    name: 'home',
-    key: 'home',
-  },
-  {
-    name: 'select',
-    key: 'select',
-  },
 ];
 
 // 再根据routes生成带有component的routes

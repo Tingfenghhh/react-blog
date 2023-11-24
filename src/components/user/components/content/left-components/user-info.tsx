@@ -82,12 +82,18 @@ function UserInfo() {
             className={'user-info-skeleton'}
             text={{
               rows: 0,
-              width: ['0%'],
+              width: ['100%'],
             }}
             animation
             image={{
               shape: 'circle',
               className: 'user-info-img-skeleton',
+              style: {
+                position: 'absolute',
+                height: '70px',
+                width: '70px',
+                marginLeft: '-35px',
+              },
             }}
           />
           <Skeleton
@@ -95,7 +101,7 @@ function UserInfo() {
             className={'user-info-skeleton user-info-skeleton-1 '}
             text={{
               rows: 5,
-              width: ['89%', '89%', '89%', '89%', '89%'],
+              width: ['100%', '100%', '100%', '100%', '100%'],
               className: 'user-info-li',
             }}
             animation

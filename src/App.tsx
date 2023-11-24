@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { ConfigProvider } from '@arco-design/web-react';
-import Notfund from '@/pages/Notfund';
+import Notfund from '@/pages/not-found';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
 import { Suspense, useEffect } from 'react';

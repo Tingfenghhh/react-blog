@@ -1,21 +1,18 @@
-import { Button } from '@arco-design/web-react';
+import { Button, Space } from '@arco-design/web-react';
 import { MiddleBox } from './style';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function MiddleContent() {
+  const navigate = useNavigate();
+  const goto = (key: string) => {
+    navigate(`/${key}`);
+  };
   return (
     <>
       <MiddleBox className='content-box'>
-        <Button>
-          <Link
-            to='/select'
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            select
-          </Link>
-        </Button>
+        <Space>
+          <Button onClick={() => goto('home')}>notfound</Button>
+        </Space>
       </MiddleBox>
     </>
   );
