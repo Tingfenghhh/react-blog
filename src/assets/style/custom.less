@@ -46,12 +46,20 @@ body {
   }
 }
 
+// display flex center Mixin
 .display-flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+// 毛玻璃效果 Mixin
+.filter {
+  backdrop-filter: blur(10px) brightness(0.9) opacity(1) saturate(100%);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+// 盒子padding Mixin
 .pd-box {
   padding: 10px 20px;
 }

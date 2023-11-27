@@ -18,7 +18,7 @@ const HeaderBox = styled(motion.div)`
   border-radius: var(--border-radius-xlarge);
   backdrop-filter: blur(5px);
   position: fixed;
-  top: 0;
+  top: 3px;
   left: 0;
   z-index: 999;
   &:hover {
@@ -57,7 +57,10 @@ const IconMoonStyled = styled(IconMoon)`
 const UserInfoMotion = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+  border-radius: var(--border-radius-xlarge);
+  box-sizing: border-box;
 `;
 
 export {

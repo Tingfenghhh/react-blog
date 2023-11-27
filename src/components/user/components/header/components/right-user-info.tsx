@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '@/hooks/redux';
 import logos from '@/assets/images/user/logos.png';
-import { Avatar, Button } from '@arco-design/web-react';
+import { Avatar, Button, Space } from '@arco-design/web-react';
 
 import { changeTheme } from '@/store/modules/user';
 import { useEffect, useState } from 'react';
@@ -27,17 +27,24 @@ function UserInfo() {
   return (
     <>
       <UserInfoMotion className='UserInfoMotion'>
-        <Button
-          shape='round'
-          type='text'
-          icon={isLight !== 'light' ? <IconMoonStyled /> : <IconSunStyled />}
-          onClick={() => change()}
+        <Space
+          size={15}
+          style={{
+            backdropFilter: 'blur(20px)',
+          }}
         >
-          <span className='theme-btn'> {themeName}</span>
-        </Button>
-        <Avatar>
-          <img width={30} height={30} src={logos} alt='logo' />
-        </Avatar>
+          <Button
+            shape='round'
+            type='text'
+            icon={isLight !== 'light' ? <IconMoonStyled /> : <IconSunStyled />}
+            onClick={() => change()}
+          >
+            <span className='theme-btn'> {themeName}</span>
+          </Button>
+          <Avatar>
+            <img width={30} height={30} src={logos} alt='logo' />
+          </Avatar>
+        </Space>
       </UserInfoMotion>
     </>
   );

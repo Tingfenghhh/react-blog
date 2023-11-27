@@ -9,6 +9,9 @@ const MyContentBox = styled(motion.div)`
 `;
 
 const LeftBox = styled.div`
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   @media screen and (max-width: 1200px) {
     display: none;
   }

@@ -1,6 +1,6 @@
 import MotionSwiper from '@/components/swiper';
 // import required modules
-import { SwiperSlide } from 'swiper/react';
+import { SwiperClass, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay, EffectCards } from 'swiper/modules';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-cards';
@@ -10,16 +10,17 @@ import waterGod from '@/assets/images/swiper/water-god.jpg';
 import hwei from '@/assets/images/swiper/hwei.jpg';
 import cmd from '@/assets/images/swiper/cmd.png';
 import serda from '@/assets/images/swiper/serda.jpg';
-import { useAppSelector } from '@/hooks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { Variants } from 'framer-motion';
 import { DelayTime } from '@/components/user/delay';
+import { saveBackImg } from '@/store/modules/user';
 
 function ImgSwiper() {
   const [swiperContent, setSwiperContent] = useState<
     JSX.Element | JSX.Element[]
   >([]);
   const isLight = useAppSelector((state) => state.user.theme);
-
+  const dispatch = useAppDispatch();
   const variants: Variants = {
     light: {
       opacity: [0, 1],
@@ -62,8 +63,14 @@ function ImgSwiper() {
     },
   ];
 
+  const swiper = (swiper: SwiperClass) => {
+    const index = swiper.activeIndex;
+    dispatch(saveBackImg(imglist[index].src));
+  };
+
   useEffect(() => {
     if (imglist.length > 0) {
+      dispatch(saveBackImg(imglist[0].src));
       setSwiperContent(
         imglist.map((item, index) => {
           return (
@@ -98,11 +105,12 @@ function ImgSwiper() {
             clickable: true,
           },
           autoplay: {
-            delay: 1500,
+            delay: 5000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           },
           effect: 'cards',
+          onActiveIndexChange: swiper,
         }}
         swiperContent={swiperContent}
         motionSwiperOptions={{

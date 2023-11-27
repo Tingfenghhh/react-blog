@@ -28,7 +28,6 @@ function HeaderMenu({
 
   useEffect(() => {
     const key = location.pathname.split('/')[2];
-    console.log('key', key);
     if (key) {
       setSelectedKeys([key]);
     } else {

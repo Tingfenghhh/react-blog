@@ -53,7 +53,9 @@ function WeatherModal7({
   useEffect(() => {
     if (data?.daily) {
       setSevenDayWeather(data?.daily);
-      setUpDateTime(dayjs(data?.updateTime).format('YYYY-MM-DD HH:mm'));
+      setUpDateTime(
+        '天气更新时间：' + dayjs(data?.updateTime).format('YYYY-MM-DD HH:mm'),
+      );
     }
   }, [data]);
   if (!cityValue && !weatherValue) {

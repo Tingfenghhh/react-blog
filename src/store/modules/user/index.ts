@@ -8,6 +8,7 @@ interface UserState {
   name: string;
   price: number;
   theme: string;
+  backImg: string;
 }
 
 // 使用该类型定义初始 state
@@ -16,6 +17,7 @@ const initialState: UserState = {
   name: 'zxd',
   price: 10,
   theme: localStorage.getItem('theme') || 'light',
+  backImg: '',
 };
 
 export const userSlice = createSlice({
@@ -44,6 +46,9 @@ export const userSlice = createSlice({
       localStorage.setItem('theme', action.payload);
       state.theme = action.payload;
     },
+    saveBackImg: (state, action: PayloadAction<string>) => {
+      state.backImg = action.payload;
+    },
   },
 });
 
@@ -53,6 +58,7 @@ export const {
   incrementByAmount,
   changeName,
   changeTheme,
+  saveBackImg,
 } = userSlice.actions;
 
 // selectors 等其他代码可以使用导入的 `RootState` 类型
