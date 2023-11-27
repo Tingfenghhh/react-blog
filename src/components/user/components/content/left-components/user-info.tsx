@@ -1,6 +1,10 @@
 import { DelayTime } from '@/components/user/delay';
 import { useAppSelector } from '@/hooks/redux';
-import { Descriptions, Skeleton } from '@arco-design/web-react';
+import {
+  Descriptions,
+  DescriptionsProps,
+  Skeleton,
+} from '@arco-design/web-react';
 import { Variants, motion } from 'framer-motion';
 import styled from 'styled-components';
 import { UserInfoData } from './user-info-data';
@@ -25,6 +29,7 @@ const UserInfoTietle = styled(motion.div)`
 
 function UserInfo() {
   const [loading, setLoading] = useState(true);
+  const [userInfoData, setUserInfoData] = useState<DescriptionsProps['data']>();
   const isLight = useAppSelector((state) => state.user.theme);
 
   const variants: Variants = {
@@ -46,6 +51,7 @@ function UserInfo() {
 
   useEffect(() => {
     setTimeout(() => {
+      setUserInfoData(UserInfoData);
       setLoading(false);
     }, 3500);
   }, []);
@@ -114,7 +120,7 @@ function UserInfo() {
         >
           <Descriptions
             title={titleTsx()}
-            data={UserInfoData}
+            data={userInfoData}
             border
             column={1}
             layout='inline-vertical'

@@ -4,7 +4,7 @@ import { Avatar, Button } from '@arco-design/web-react';
 
 import { changeTheme } from '@/store/modules/user';
 import { useEffect, useState } from 'react';
-import { IconMoonStyled, IconSunStyled, UserInfoMotion } from './style';
+import { IconMoonStyled, IconSunStyled, UserInfoMotion } from '../style';
 
 function UserInfo() {
   const dispatch = useAppDispatch();

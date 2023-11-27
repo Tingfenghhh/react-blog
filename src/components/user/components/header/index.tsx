@@ -1,6 +1,6 @@
 import { HeaderBox } from './style';
-import Logo from './left-logo';
-import UserInfo from './right-user-info';
+import Logo from './components/left-logo';
+import UserInfo from './components/right-user-info';
 import { useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '@/hooks/redux';
 import './index.less';

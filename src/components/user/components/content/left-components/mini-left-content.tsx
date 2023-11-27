@@ -36,7 +36,7 @@ function MiniLeftContent() {
           left: show ? '10px' : '-310px',
         }}
       >
-        {show && <LeftContent show={true} />}
+        <LeftContent show={true} />
         <MiniButton
           shape='circle'
           icon={show ? <IconLeft /> : <IconRight />}

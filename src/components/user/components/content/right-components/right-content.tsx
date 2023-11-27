@@ -1,9 +1,9 @@
 import { useAppSelector } from '@/hooks/redux';
-import { MotionColock, RightBox } from './style';
+import { MotionColock, RightBox } from '../style';
 import Clocks from '@/components/clcok';
 import { Variants } from 'framer-motion';
-import ImgSwiper from './right-components/img-swiper';
-import { DelayTime } from '../../delay';
+import ImgSwiper from './img-swiper';
+import { DelayTime } from '../../../delay';
 
 function RightContent({ show }: { show?: boolean }) {
   const isLight = useAppSelector((state) => state.user.theme);

@@ -61,7 +61,7 @@ function HeaderMenu({
             menuData[0].children.map((item) => {
               return (
                 <MenuItem key={item.name} onClick={() => goto(item)}>
-                  {item.name}
+                  {item.text}
                 </MenuItem>
               );
             })}

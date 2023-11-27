@@ -8,16 +8,14 @@ const Content = Layout.Content;
 
 function User() {
   return (
-    <>
-      <Layout style={{ height: '100%' }}>
-        <Header className={'header'}>
-          <MyHeader />
-        </Header>
-        <Content className={'content'}>
-          <MyContent />
-        </Content>
-      </Layout>
-    </>
+    <Layout style={{ height: '100%' }}>
+      <Header className={'header'}>
+        <MyHeader />
+      </Header>
+      <Content className={'content'}>
+        <MyContent />
+      </Content>
+    </Layout>
   );
 }
 

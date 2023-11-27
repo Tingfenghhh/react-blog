@@ -1,11 +1,11 @@
 import './index.less';
 import { MyContentBox } from './style';
-import LeftContent from './left-content';
+import LeftContent from './left-components/left-content';
 import { Affix, Grid } from '@arco-design/web-react';
-import MiddleContent from './middle-content';
-import RightContent from './right-content';
-import MiniRightContent from './mini-right-content';
-import MiniLeftContent from './mini-left-content';
+import MiddleContent from './middle-components/middle-content';
+import RightContent from './right-components/right-content';
+import MiniRightContent from './right-components/mini-right-content';
+import MiniLeftContent from './left-components/mini-left-content';
 
 const { Row, Col } = Grid;
 

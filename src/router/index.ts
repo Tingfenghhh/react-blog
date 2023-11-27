@@ -9,18 +9,22 @@ const routes: IRoute[] = [
       {
         name: 'Home',
         key: 'Home',
+        text: '首页',
       },
       {
         name: 'Vue',
         key: 'Vue',
+        text: 'Vue',
       },
       {
         name: 'React',
         key: 'React',
+        text: 'React',
       },
       {
         name: 'other',
         key: 'other',
+        text: '其他',
       },
     ],
   },

@@ -11,6 +11,7 @@ export interface AuthParams {
 export type IRoute = {
   name: string;
   key: string;
+  text?: string;
   component?: any;
   // 当前页是否展示面包屑
   breadcrumb?: boolean;

@@ -1,5 +1,5 @@
-import ProGress from './components/progress';
-import { LogoMotion, LogoSpan } from './style';
+import ProGress from './progress';
+import { LogoMotion, LogoSpan } from '../style';
 
 function Logo() {
   return (

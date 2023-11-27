@@ -1,9 +1,9 @@
 import { Trigger } from '@arco-design/web-react';
-import { MiddleBox } from './style';
+import { MiddleBox } from '../style';
 import { Outlet } from 'react-router-dom';
 import { useState } from 'react';
 import { IconMessage, IconClose } from '@arco-design/web-react/icon';
-import HeaderMenu from '../header/components/header-menu';
+import HeaderMenu from '../../header/components/header-menu';
 
 function MiddleContent() {
   const [popupVisibleOne, setPopupVisibleOne] = useState(false);

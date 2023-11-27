@@ -1,6 +1,6 @@
-import UserInfo from './left-components/user-info';
-import Wether from './left-components/wether';
-import { LeftBox } from './style';
+import UserInfo from './user-info';
+import Wether from './wether';
+import { LeftBox } from '../style';
 
 function LeftContent({ show }: { show?: boolean }) {
   return (
