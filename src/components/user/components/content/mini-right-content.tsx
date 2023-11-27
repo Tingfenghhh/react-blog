@@ -11,9 +11,7 @@ const MiniRight = styled(motion.div)`
   right: 10px;
   width: 300px;
   transition: all 0.5s;
-  @media screen and (max-width: 1920px) {
-    display: none;
-  }
+  display: none;
   @media screen and (max-width: 1199px) {
     display: block;
   }
@@ -38,7 +36,7 @@ function MiniRightContent() {
           right: show ? '30px' : '-310px',
         }}
       >
-        <RightContent show={true} />
+        {show && <RightContent show={true} />}
         <MiniButton
           shape='circle'
           icon={!show ? <IconLeft /> : <IconRight />}

@@ -6,7 +6,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const MenuItem = Menu.Item;
 
-function HeaderMenu() {
+function HeaderMenu({
+  show,
+  mode,
+}: {
+  show?: boolean;
+  mode?: 'vertical' | 'horizontal' | 'pop' | 'popButton';
+}) {
   const [menuData, setMenuData] = useState<IRoute[]>();
   const [selctedKeys, setSelectedKeys] = useState<string[]>([]);
   const location = useLocation();
@@ -38,9 +44,14 @@ function HeaderMenu() {
 
   return (
     <>
-      <div className='header-menu'>
+      <div
+        className='header-menu'
+        style={{
+          display: show ? 'block' : '',
+        }}
+      >
         <Menu
-          mode='horizontal'
+          mode={mode ? mode : 'horizontal'}
           ellipsis={false}
           defaultSelectedKeys={['Home']}
           selectedKeys={selctedKeys}

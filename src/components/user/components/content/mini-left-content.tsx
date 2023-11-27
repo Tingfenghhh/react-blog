@@ -11,9 +11,7 @@ const MiniLeft = styled(motion.div)`
   left: 10px;
   width: 300px;
   transition: all 0.5s;
-  @media screen and (max-width: 1920px) {
-    display: none;
-  }
+  display: none;
   @media screen and (max-width: 1199px) {
     display: block;
   }
@@ -38,7 +36,7 @@ function MiniLeftContent() {
           left: show ? '10px' : '-310px',
         }}
       >
-        <LeftContent show={true} />
+        {show && <LeftContent show={true} />}
         <MiniButton
           shape='circle'
           icon={show ? <IconLeft /> : <IconRight />}
