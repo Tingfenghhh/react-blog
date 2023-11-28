@@ -58,26 +58,16 @@ function UserInfo() {
 
   const titleTsx = () => {
     return (
-      <motion.div
-        style={{
-          boxShadow: '0 5px 10px 0 rgba(0, 0, 0, 0.3)',
-          backdropFilter: 'blur(10px) brightness(0.9) saturate(100%)',
-          borderRadius: '15px',
-          boxSizing: 'border-box',
-          padding: '10px 0',
-        }}
-      >
-        <UserInfoTietle>
-          <img
-            src={logos}
-            style={{
-              height: '70px',
-              borderRadius: '50%',
-            }}
-            alt='头像'
-          />
-        </UserInfoTietle>
-      </motion.div>
+      <UserInfoTietle>
+        <img
+          src={logos}
+          style={{
+            height: '70px',
+            borderRadius: '50%',
+          }}
+          alt='头像'
+        />
+      </UserInfoTietle>
     );
   };
 
@@ -87,7 +77,7 @@ function UserInfo() {
         <>
           <Skeleton
             loading={loading}
-            className={'user-info-skeleton'}
+            className={`user-info-skeleton`}
             text={{
               rows: 0,
               width: '100%',
@@ -126,7 +116,11 @@ function UserInfo() {
             border
             column={1}
             layout='inline-vertical'
-            className={'user-info-descriptions'}
+            className={`user-info-descriptions ${
+              isLight === 'light'
+                ? 'user-info-descriptions-light'
+                : 'user-info-descriptions-dark'
+            }`}
           />
         </UserInfoBox>
       )}

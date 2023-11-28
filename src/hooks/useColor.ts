@@ -5,7 +5,7 @@ function getRandomWarmGradient(warm: boolean) {
     const green = Math.floor(Math.random() * 100 + 100);
     const blue = !warm ? Math.floor(Math.random() + 160 + 50) : 107;
 
-    return `rgb(${red}, ${green}, ${blue})`;
+    return `rgba(${red}, ${green}, ${blue}, 0.8)`;
   }
   const color1 = getRandomWarmColor();
   const color2 = getRandomWarmColor();
