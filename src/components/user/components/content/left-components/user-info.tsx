@@ -66,7 +66,6 @@ function UserInfo() {
           boxSizing: 'border-box',
           padding: '10px 0',
         }}
-        whileHover={{}}
       >
         <UserInfoTietle>
           <img

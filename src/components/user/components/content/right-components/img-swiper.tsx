@@ -10,6 +10,9 @@ import waterGod from '@/assets/images/swiper/water-god.jpg';
 import hwei from '@/assets/images/swiper/hwei.jpg';
 import cmd from '@/assets/images/swiper/cmd.png';
 import serda from '@/assets/images/swiper/serda.jpg';
+import WaterGod_1 from '@/assets/images/swiper/waterGod-1.jpg';
+import tianyi from '@/assets/images/swiper/tianyi.jpg';
+import kafuka from '@/assets/images/swiper/kafuka.jpg';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { Variants } from 'framer-motion';
 import { DelayTime } from '@/components/user/delay';
@@ -61,6 +64,18 @@ function ImgSwiper() {
       name: 'serda',
       src: serda,
     },
+    {
+      name: 'WaterGod_1',
+      src: WaterGod_1,
+    },
+    {
+      name: 'tianyi',
+      src: tianyi,
+    },
+    {
+      name: 'kafuka',
+      src: kafuka,
+    },
   ];
 
   const swiper = (swiper: SwiperClass) => {
@@ -105,7 +120,7 @@ function ImgSwiper() {
             clickable: true,
           },
           autoplay: {
-            delay: 5000,
+            delay: 10000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           },
