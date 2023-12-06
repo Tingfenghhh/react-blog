@@ -11,6 +11,8 @@ axiosInstance.interceptors.request.use(
   (res: InternalAxiosRequestConfig) => {
     if (/\/weathernow/.test(res.url!)) res.baseURL = VITE_API_WEATHER_URL;
     if (/\/geoapi/.test(res.url!)) res.baseURL = VITE_API_WEATHER_LOCATION;
+    if (/\/blog/.test(res.url!))
+      res.baseURL = import.meta.env.VITE_API_BLOG_URL;
     return res;
   },
   (error) => {

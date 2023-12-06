@@ -12,6 +12,14 @@ export default defineConfig({
     strictPort: false, // 设为 true 时，若端口已被占用会直接退出，不会尝试下一个可用端口
     https: false, // 是否开启 https 服务
     cors: true, // 允许跨域
+    proxy: {
+      // 选项写法
+      '/blog': {
+        target: 'http://192.168.10.208:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/blog/, ''),
+      },
+    },
   },
   base: './',
   publicDir: 'public',

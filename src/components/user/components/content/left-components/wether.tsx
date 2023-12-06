@@ -48,6 +48,7 @@ function Wether() {
   const getCityName = async () => {
     const ip = await getIp();
     const city = await getCity(ip);
+    console.log(ip, city);
     setCityName(city);
   };
   // 查询城市详情信息

@@ -9,6 +9,7 @@ interface UserState {
   price: number;
   theme: string;
   backImg: string;
+  user: string;
 }
 
 // 使用该类型定义初始 state
@@ -18,6 +19,7 @@ const initialState: UserState = {
   price: 10,
   theme: localStorage.getItem('theme') || 'light',
   backImg: '',
+  user: '',
 };
 
 export const userSlice = createSlice({
