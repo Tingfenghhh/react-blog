@@ -1,10 +1,10 @@
 import User from '@/components/user/index';
 import { motion } from 'framer-motion';
-import { RouterAnimationOptions } from '../router-animation-options';
+import { RouterFatherAnimationOptions } from '../router-animation-options';
 
 const login = () => {
   return (
-    <motion.div {...RouterAnimationOptions}>
+    <motion.div {...RouterFatherAnimationOptions}>
       <User />
     </motion.div>
   );

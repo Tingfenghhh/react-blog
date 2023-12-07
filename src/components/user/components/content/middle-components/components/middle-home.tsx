@@ -1,21 +1,19 @@
 import {
   Button,
-  Input,
   Message,
   Space,
   Table,
   TableColumnProps,
 } from '@arco-design/web-react';
 import { IconDelete, IconEdit } from '@arco-design/web-react/icon';
-import useAxios from 'axios-hooks';
 import { useEffect, useState } from 'react';
+import ArticleAddFrom from './article-add-form';
+import { useMyAxios } from '@/apis/intercept';
 
 const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFpbXMiOnsiaWQiOjMsInVzZXJuYW1lIjoiemhvdXhpYW9kIn0sImV4cCI6MTcwMTg1NzAyNn0.B3FtkTkSzyAH6fvZKEmOedUZcs3r3qay5pEDZOXhCJ0';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFpbXMiOnsiaWQiOjMsInVzZXJuYW1lIjoiemhvdXhpYW9kIn0sImV4cCI6MTcwMTk0ODc3NX0.w4L5KdqJsx4hyG25va-9VulF_VbblTR-S_6zL-jm1qY';
 
 function MiddleHome() {
-  const [categoryName, setCategoryName] = useState('');
-  const [categoryAlias, setCategoryAlias] = useState('');
   const [listData, setListData] = useState<CategoryDataListOfTable[]>();
 
   const columns: TableColumnProps[] = [
@@ -67,7 +65,8 @@ function MiddleHome() {
   ];
 
   //   添加文章列表
-  const [, execute] = useAxios<BlogReturnData<string>, AddCategoryData>(
+  //  useMyAxios可以传递三个类型TResponse, TBody, TError，对应返回值，请求体，错误类型
+  const [, execute] = useMyAxios<BlogReturnData<string>, AddCategoryData>(
     {
       url: `/blog/category`,
       method: 'POST',
@@ -79,7 +78,7 @@ function MiddleHome() {
   );
 
   // 查询文章列表
-  const [{ data, loading }, ListExecute] = useAxios<CategoryDataList>(
+  const [{ data, loading }, ListExecute] = useMyAxios<CategoryDataList>(
     {
       url: `/blog/category`,
       method: 'GET',
@@ -91,7 +90,7 @@ function MiddleHome() {
   );
 
   // 删除文章
-  const [{ loading: deletLoading }, DeleteExecute] = useAxios<
+  const [{ loading: deletLoading }, DeleteExecute] = useMyAxios<
     BlogReturnData<string>,
     { id: number }
   >(
@@ -105,11 +104,11 @@ function MiddleHome() {
     { manual: true },
   );
 
-  const addCategoryList = () => {
+  //  提交数据
+  const submitData = (val: AddCategoryData) => {
     execute({
       data: {
-        categoryName,
-        categoryAlias,
+        ...val,
       },
     }).then((res) => {
       if (res && res.data.code === 0) {
@@ -123,7 +122,10 @@ function MiddleHome() {
 
   //  编辑按钮
   const editBtn = (record: CategoryDataListOfTable) => {
-    Message.info('暂未开放');
+    Message.info({
+      id: 'editBtn',
+      content: '暂未开放',
+    });
     console.log('editBtn', record.id);
   };
 
@@ -160,31 +162,16 @@ function MiddleHome() {
   useEffect(() => {
     ListExecute();
   }, []);
-
   return (
     <>
       <Space
-        direction={'vertical'}
+        direction='vertical'
         size={20}
         style={{
           width: '100%',
         }}
       >
-        <Input
-          value={categoryName}
-          onChange={(value) => setCategoryName(value)}
-          autoWidth={{ minWidth: 200 }}
-          placeholder='分类名称'
-        />
-        <Input
-          value={categoryAlias}
-          onChange={(value) => setCategoryAlias(value)}
-          autoWidth={{ minWidth: 200 }}
-          placeholder='分类别名'
-        />
-        <Button type='primary' onClick={addCategoryList}>
-          添加文章列表
-        </Button>
+        <ArticleAddFrom submitData={(val) => submitData(val)} />
         <Table
           style={{
             width: '100%',
