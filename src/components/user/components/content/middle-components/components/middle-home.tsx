@@ -9,9 +9,11 @@ import { IconDelete, IconEdit } from '@arco-design/web-react/icon';
 import { useEffect, useState } from 'react';
 import ArticleAddFrom from './article-add-form';
 import { useMyAxios } from '@/apis/intercept';
-
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFpbXMiOnsiaWQiOjMsInVzZXJuYW1lIjoiemhvdXhpYW9kIn0sImV4cCI6MTcwMTk0ODc3NX0.w4L5KdqJsx4hyG25va-9VulF_VbblTR-S_6zL-jm1qY';
+import {
+  addArticleConfig,
+  deleteArticleConfig,
+  getArticleListConfig,
+} from '@/apis/blog';
 
 function MiddleHome() {
   const [listData, setListData] = useState<CategoryDataListOfTable[]>();
@@ -67,42 +69,21 @@ function MiddleHome() {
   //   添加文章列表
   //  useMyAxios可以传递三个类型TResponse, TBody, TError，对应返回值，请求体，错误类型
   const [, execute] = useMyAxios<BlogReturnData<string>, AddCategoryData>(
-    {
-      url: `/blog/category`,
-      method: 'POST',
-      headers: {
-        Authorization: token,
-      },
-    },
-    { manual: true },
+    addArticleConfig.config,
+    addArticleConfig.options,
   );
 
   // 查询文章列表
   const [{ data, loading }, ListExecute] = useMyAxios<CategoryDataList>(
-    {
-      url: `/blog/category`,
-      method: 'GET',
-      headers: {
-        Authorization: token,
-      },
-    },
-    { manual: true },
+    getArticleListConfig.config,
+    getArticleListConfig.options,
   );
 
   // 删除文章
   const [{ loading: deletLoading }, DeleteExecute] = useMyAxios<
     BlogReturnData<string>,
     { id: number }
-  >(
-    {
-      url: `/blog/category/delete`,
-      method: 'POST',
-      headers: {
-        Authorization: token,
-      },
-    },
-    { manual: true },
-  );
+  >(deleteArticleConfig.config, deleteArticleConfig.options);
 
   //  提交数据
   const submitData = (val: AddCategoryData) => {

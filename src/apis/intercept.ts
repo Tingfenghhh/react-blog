@@ -9,19 +9,17 @@ const axiosInstance = axios.create({
   timeout: 60000,
 });
 
+const token =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFpbXMiOnsiaWQiOjMsInVzZXJuYW1lIjoiemhvdXhpYW9kIn0sImV4cCI6MTcwMTk0ODc3NX0.w4L5KdqJsx4hyG25va-9VulF_VbblTR-S_6zL-jm1qY';
+
 axiosInstance.interceptors.request.use(
   (res: InternalAxiosRequestConfig) => {
     if (/\/weathernow/.test(res.url!)) res.baseURL = VITE_API_WEATHER_URL;
     if (/\/geoapi/.test(res.url!)) res.baseURL = VITE_API_WEATHER_LOCATION;
     // blog
-    // if (/\/blog/.test(res.url!)) {
-    //   // 从url删除blog
-    //   res.url = res.url!.replace('/blog', '');
-    //   res.baseURL = VITE_API_BLOG_URL;
-    //   res.headers['Authorization'] = `${token}`;
-    //   // 配置跨域
-    //   res.headers['Access-Control-Allow-Origin'] = '*';
-    // }
+    if (/\/blog/.test(res.url!)) {
+      res.headers['Authorization'] = `${token}`;
+    }
 
     return res;
   },
