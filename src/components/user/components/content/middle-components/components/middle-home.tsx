@@ -1,6 +1,7 @@
 import {
   Button,
   Message,
+  PaginationProps,
   Space,
   Table,
   TableColumnProps,
@@ -12,34 +13,30 @@ import { useMyAxios } from '@/apis/intercept';
 import {
   addArticleConfig,
   deleteArticleConfig,
+  getArticleDetailListConfig,
   getArticleListConfig,
 } from '@/apis/blog';
+import { articleClassColumns, articleListColumns } from './table-columns';
 
 function MiddleHome() {
   const [listData, setListData] = useState<CategoryDataListOfTable[]>();
+  const [articleListData, setArticleListData] =
+    useState<GetArticleDetailListData[]>();
   const [globalLoading, setGlobalLoading] = useState<boolean>(false);
+  const [pagination, setPagination] = useState<PaginationProps>({
+    sizeCanChange: true,
+    showTotal: true,
+    total: 0,
+    pageSize: 5,
+    current: 1,
+    defaultPageSize: 5,
+    sizeOptions: [5, 10, 20, 50],
+    pageSizeChangeResetCurrent: true,
+  });
+  const [arcleListLoading, setArcleListLoading] = useState(false);
 
   const columns: TableColumnProps[] = [
-    {
-      title: '分类名称',
-      dataIndex: 'categoryName',
-      align: 'center',
-    },
-    {
-      title: '分类别名',
-      dataIndex: 'categoryAlias',
-      align: 'center',
-    },
-    {
-      title: '创建时间',
-      dataIndex: 'createTime',
-      align: 'center',
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'updateTime',
-      align: 'center',
-    },
+    ...articleClassColumns,
     {
       title: '操作按钮',
       dataIndex: 'op',
@@ -47,7 +44,7 @@ function MiddleHome() {
       render: (_, record) => (
         <Space>
           <Button
-            onClick={() => editBtn(record)}
+            onClick={() => editBtn()}
             type='primary'
             status={'success'}
             icon={<IconEdit />}
@@ -67,26 +64,45 @@ function MiddleHome() {
     },
   ];
 
-  //   添加文章列表
+  const artilceListColumns: TableColumnProps[] = [
+    ...articleListColumns,
+    {
+      title: '操作按钮',
+      dataIndex: 'op',
+      align: 'center',
+      render: () => (
+        <Space>
+          <Button type='primary' status={'success'} icon={<IconEdit />}>
+            编辑
+          </Button>
+          <Button type='primary' status={'danger'} icon={<IconDelete />}>
+            删除
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+
+  //   添加文章分类列表
   //  useMyAxios可以传递三个类型TResponse, TBody, TError，对应返回值，请求体，错误类型
   const [, execute] = useMyAxios<BlogReturnData<string>, AddCategoryData>(
     addArticleConfig.config,
     addArticleConfig.options,
   );
 
-  // 查询文章列表
+  // 查询文章分类列表
   const [{ data, loading }, ListExecute] = useMyAxios<CategoryDataList>(
     getArticleListConfig.config,
     getArticleListConfig.options,
   );
 
-  // 删除文章
+  // 删除文章分类
   const [{ loading: deletLoading }, DeleteExecute] = useMyAxios<
     BlogReturnData<string>,
     { id: number }
   >(deleteArticleConfig.config, deleteArticleConfig.options);
 
-  //  提交数据
+  //  添加文章分类提交数据
   const submitData = (val: AddCategoryData) => {
     execute({
       data: {
@@ -103,17 +119,15 @@ function MiddleHome() {
   };
 
   //  编辑按钮
-  const editBtn = (record: CategoryDataListOfTable) => {
+  const editBtn = () => {
     Message.info({
       id: 'editBtn',
       content: '暂未开放',
     });
-    console.log('editBtn', record.id);
   };
 
   //   删除按钮
   const deleteBtn = (record: CategoryDataListOfTable) => {
-    console.log('deleteBtn', record.id);
     DeleteExecute({
       params: { id: record.id },
     }).then((res) => {
@@ -124,10 +138,48 @@ function MiddleHome() {
     });
   };
 
+  const [{ data: ArticlListData, loading: ArticlListLoading }, ArticleListRun] =
+    useMyAxios<GetArticleDetailListReturnData, GetArticleDetailListParams>(
+      getArticleDetailListConfig.config,
+      getArticleDetailListConfig.options,
+    );
+
+  // 文章列表
+  const onChangeTable = (pagination: PaginationProps) => {
+    const { current, pageSize } = pagination;
+    ArticleListRun({
+      params: {
+        pageSize,
+        pageNum: current,
+      },
+    });
+    setArcleListLoading(true);
+    setTimeout(() => {
+      setPagination((pagination) => ({ ...pagination, current, pageSize }));
+      setArcleListLoading(false);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (ArticlListData && ArticlListData.code === 0) {
+      setPagination((pagination) => ({
+        ...pagination,
+        total: ArticlListData.data.total,
+      }));
+      const list: GetArticleDetailListData[] = ArticlListData.data.item.map(
+        (item) => {
+          return {
+            ...item,
+          };
+        },
+      );
+      setArticleListData(list);
+    }
+  }, [ArticlListData]);
+
   useEffect(() => {
     if (data && data.code === 0) {
       if (data.data.length > 0) {
-        console.log('data.data', data.data);
         const list: CategoryDataListOfTable[] = data.data.map((item) => {
           return {
             ...item,
@@ -150,17 +202,33 @@ function MiddleHome() {
 
   useEffect(() => {
     ListExecute();
+    ArticleListRun({
+      params: {
+        pageSize: pagination.pageSize,
+        pageNum: pagination.current,
+      },
+    });
   }, []);
   return (
     <>
       <Space
         direction='vertical'
-        size={20}
+        size={10}
         style={{
           width: '100%',
         }}
       >
-        <ArticleAddFrom submitData={(val) => submitData(val)} />
+        <Space size={100}>
+          <div>
+            <h2>添加文章分类</h2>
+            <ArticleAddFrom submitData={(val) => submitData(val)} />
+          </div>
+          <div>
+            <h2>添加文章</h2>
+            <ArticleAddFrom submitData={(val) => submitData(val)} />
+          </div>
+        </Space>
+        <h2>文章分类表格</h2>
         <Table
           style={{
             width: '100%',
@@ -169,6 +237,14 @@ function MiddleHome() {
           columns={columns}
           data={listData}
           loading={globalLoading}
+        />
+        <h2>文章列表表格</h2>
+        <Table
+          loading={ArticlListLoading || arcleListLoading}
+          columns={artilceListColumns}
+          data={articleListData}
+          pagination={pagination}
+          onChange={onChangeTable}
         />
       </Space>
     </>

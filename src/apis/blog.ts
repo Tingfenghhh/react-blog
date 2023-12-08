@@ -1,6 +1,7 @@
 import { UseAxiosCutomConfig } from '@/typings/customConfig';
 
 const baseURL = '/blog/category';
+const articleBaseURL = '/blog/article';
 const options: UseAxiosCutomConfig['options'] = {
   manual: true,
 };
@@ -28,6 +29,15 @@ export const deleteArticleConfig: UseAxiosCutomConfig = {
   config: {
     url: `${baseURL}/delete`,
     method: 'POST',
+  },
+  options,
+};
+
+// 分页查询文章列表
+export const getArticleDetailListConfig: UseAxiosCutomConfig = {
+  config: {
+    url: `${articleBaseURL}/listByPage`,
+    method: 'GET',
   },
   options,
 };

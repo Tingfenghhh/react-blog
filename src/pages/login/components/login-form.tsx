@@ -36,14 +36,12 @@ function LoginForm() {
   );
 
   const login = (val: LoginParams) => {
-    console.log('val', val);
     Login({
       data: {
         username: val.username,
         password: val.password,
       },
     }).then((res) => {
-      console.log(res);
       if (res.data.code === 0) {
         if (remenber) {
           // 存储账户密码

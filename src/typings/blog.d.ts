@@ -29,3 +29,31 @@ interface CategoryDataListOfTable {
   createTime: string;
   updateTime: string;
 }
+
+// 查询文章详情列表参数
+interface GetArticleDetailListParams {
+  pageNum: number;
+  pageSize: number;
+  categoryId?: number;
+  state?: string;
+}
+
+// 文章详情列表返回结果
+interface GetArticleDetailListData {
+  id: number;
+  title: string;
+  content: string;
+  coverImg: string;
+  state: string;
+  categoryId: number;
+  createUser: number;
+  createTime: string;
+  updateTime: string;
+}
+
+type GetArticleDetailListReturnData = BlogReturnData<{
+  page: number;
+  size: number;
+  total: number;
+  item: GetArticleDetailListData[];
+}>;
