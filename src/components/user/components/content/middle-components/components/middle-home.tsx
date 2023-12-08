@@ -17,6 +17,7 @@ import {
 
 function MiddleHome() {
   const [listData, setListData] = useState<CategoryDataListOfTable[]>();
+  const [globalLoading, setGlobalLoading] = useState<boolean>(false);
 
   const columns: TableColumnProps[] = [
     {
@@ -141,6 +142,13 @@ function MiddleHome() {
   }, [data]);
 
   useEffect(() => {
+    if (loading || deletLoading) setGlobalLoading(true);
+    setTimeout(() => {
+      setGlobalLoading(false);
+    }, 500);
+  }, [loading, deletLoading]);
+
+  useEffect(() => {
     ListExecute();
   }, []);
   return (
@@ -160,7 +168,7 @@ function MiddleHome() {
           stripe
           columns={columns}
           data={listData}
-          loading={loading || deletLoading}
+          loading={globalLoading}
         />
       </Space>
     </>

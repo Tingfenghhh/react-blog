@@ -1,33 +1,33 @@
 import { UseAxiosCutomConfig } from '@/typings/customConfig';
+
+const baseURL = '/blog/category';
+const options: UseAxiosCutomConfig['options'] = {
+  manual: true,
+};
+
 // 添加文章列表
 export const addArticleConfig: UseAxiosCutomConfig = {
   config: {
-    url: `/blog/category`,
+    url: baseURL,
     method: 'POST',
   },
-  options: {
-    manual: true,
-  },
+  options,
 };
 
 // 查询文章列表
 export const getArticleListConfig: UseAxiosCutomConfig = {
   config: {
-    url: `/blog/category`,
+    url: baseURL,
     method: 'GET',
   },
-  options: {
-    manual: true,
-  },
+  options,
 };
 
 // 删除文章
 export const deleteArticleConfig: UseAxiosCutomConfig = {
   config: {
-    url: `/blog/category/delete`,
+    url: `${baseURL}/delete`,
     method: 'POST',
   },
-  options: {
-    manual: true,
-  },
+  options,
 };
