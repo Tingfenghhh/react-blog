@@ -2,7 +2,7 @@ import { RouterAnimationOptions } from '@/pages/router-animation-options';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const LoginOtherBox = styled(motion.div)`
+const HomeVueBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   color: var(--color-text-1);
@@ -10,13 +10,12 @@ const LoginOtherBox = styled(motion.div)`
     color: var(--color-text-1);
   }
 `;
-
-function LoginOther() {
+function HomeVue() {
   return (
-    <LoginOtherBox {...RouterAnimationOptions}>
-      <span>LoginOtherBox</span>
-    </LoginOtherBox>
+    <HomeVueBox {...RouterAnimationOptions}>
+      <span>HomeVueBox</span>
+    </HomeVueBox>
   );
 }
 
-export default LoginOther;
+export default HomeVue;

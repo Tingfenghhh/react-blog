@@ -16,10 +16,11 @@ function HeaderMenu({
   const [menuData, setMenuData] = useState<IRoute[]>();
   const [selctedKeys, setSelectedKeys] = useState<string[]>([]);
   const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     const menu: IRoute[] = [];
     routes.forEach((route) => {
-      if (route.name === 'login') {
+      if (route.name === 'home') {
         menu.push(route);
       }
     });
@@ -31,15 +32,13 @@ function HeaderMenu({
     if (key) {
       setSelectedKeys([key]);
     } else {
-      setSelectedKeys(['Home']);
-      navigate('/login/Home');
+      setSelectedKeys(['index']);
+      navigate('/home/index');
     }
   }, [location]);
 
-  const navigate = useNavigate();
-
   const goto = (val: IRoute) => {
-    navigate(`/login/${val.key}`);
+    navigate(`/home/${val.key}`);
     setSelectedKeys([val.name]);
   };
 
@@ -54,7 +53,7 @@ function HeaderMenu({
         <Menu
           mode={mode ? mode : 'horizontal'}
           ellipsis={false}
-          defaultSelectedKeys={['Home']}
+          defaultSelectedKeys={['index']}
           selectedKeys={selctedKeys}
         >
           {menuData &&

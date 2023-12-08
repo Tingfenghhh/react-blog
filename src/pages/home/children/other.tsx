@@ -1,9 +1,8 @@
-import MiddleHome from '@/components/user/components/content/middle-components/components/middle-home';
 import { RouterAnimationOptions } from '@/pages/router-animation-options';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const LoginHomeBox = styled(motion.div)`
+const HomeOtherBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   color: var(--color-text-1);
@@ -12,12 +11,12 @@ const LoginHomeBox = styled(motion.div)`
   }
 `;
 
-function LoginHome() {
+function HomeOther() {
   return (
-    <LoginHomeBox {...RouterAnimationOptions}>
-      <MiddleHome />
-    </LoginHomeBox>
+    <HomeOtherBox {...RouterAnimationOptions}>
+      <span>HomeOtherBox</span>
+    </HomeOtherBox>
   );
 }
 
-export default LoginHome;
+export default HomeOther;

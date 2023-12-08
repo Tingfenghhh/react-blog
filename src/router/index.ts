@@ -5,10 +5,14 @@ const routes: IRoute[] = [
   {
     name: 'login',
     key: 'login',
+  },
+  {
+    name: 'home',
+    key: 'home',
     children: [
       {
-        name: 'Home',
-        key: 'Home',
+        name: 'index',
+        key: 'index',
         text: '首页',
       },
       {

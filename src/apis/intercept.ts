@@ -9,15 +9,13 @@ const axiosInstance = axios.create({
   timeout: 60000,
 });
 
-const token =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjbGFpbXMiOnsiaWQiOjMsInVzZXJuYW1lIjoiemhvdXhpYW9kIn0sImV4cCI6MTcwMTk0ODc3NX0.w4L5KdqJsx4hyG25va-9VulF_VbblTR-S_6zL-jm1qY';
-
 axiosInstance.interceptors.request.use(
   (res: InternalAxiosRequestConfig) => {
     if (/\/weathernow/.test(res.url!)) res.baseURL = VITE_API_WEATHER_URL;
     if (/\/geoapi/.test(res.url!)) res.baseURL = VITE_API_WEATHER_LOCATION;
     // blog
     if (/\/blog/.test(res.url!)) {
+      const token = localStorage.getItem('Blogtoken');
       res.headers['Authorization'] = `${token}`;
     }
 
@@ -33,6 +31,12 @@ axiosInstance.interceptors.response.use(
     return res;
   },
   (err) => {
+    // 如果401，跳转到登录页面
+    if (err.response.status === 401) {
+      localStorage.removeItem('Blogtoken');
+      window.location.href = '/login';
+    }
+
     Message.error(err.message);
     return Promise.reject(err);
   },
