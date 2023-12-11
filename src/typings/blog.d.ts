@@ -4,13 +4,17 @@ interface BlogReturnData<T> {
   data: T;
 }
 
-// 添加文章类型参数
+// 添加文章分类类型参数
 interface AddCategoryData {
   categoryName: string; // 分类名称
   categoryAlias: string; // 分类别名
 }
 
-// 查询文章列表返回结果
+type UpdateCategoryData = AddCategoryData & {
+  id: number;
+};
+
+// 查询文章分类列表返回结果
 interface GetCategoryListReturnData {
   id: number;
   categoryName: string;
@@ -19,7 +23,12 @@ interface GetCategoryListReturnData {
   updateTime: string;
 }
 
-type CategoryDataList = BlogReturnData<GetCategoryListReturnData[]>;
+type CategoryDataList = BlogReturnData<{
+  page: number;
+  size: number;
+  total: number;
+  item: GetCategoryListReturnData[];
+}>;
 
 interface CategoryDataListOfTable {
   id: number;
@@ -28,6 +37,14 @@ interface CategoryDataListOfTable {
   categoryAlias: string;
   createTime: string;
   updateTime: string;
+}
+
+// 查询文章分类列表参数
+interface GetCategoryDataListByPageParams {
+  pageNum: number;
+  pageSize: number;
+  categoryName?: string;
+  createUser?: number;
 }
 
 // 查询文章详情列表参数
@@ -51,9 +68,25 @@ interface GetArticleDetailListData {
   updateTime: string;
 }
 
+type ArticleDetailListDataOfTable = Omit<
+  GetArticleDetailListData,
+  'categoryId'
+> & {
+  categoryId: string;
+};
+
 type GetArticleDetailListReturnData = BlogReturnData<{
   page: number;
   size: number;
   total: number;
   item: GetArticleDetailListData[];
 }>;
+
+// 添加文章参数
+interface AddArticleParams {
+  title: string;
+  content: string;
+  coverImg: string;
+  state: string;
+  categoryId: number;
+}

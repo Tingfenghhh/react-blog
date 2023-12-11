@@ -28,6 +28,10 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (res) => {
+    const { data } = res;
+    if (data.code === 0) return res;
+    Message.error(data.message);
+
     return res;
   },
   (err) => {

@@ -3,7 +3,7 @@ import { AxiosRequestConfig } from 'axios';
 
 type TBody = any;
 
-interface UseAxiosCutomConfig {
+interface UseAxiosCustomConfig {
   config: AxiosRequestConfig<TBody> | string;
   options: Options;
 }

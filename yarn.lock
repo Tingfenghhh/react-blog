@@ -22,10 +22,10 @@
   dependencies:
     color "^3.1.3"
 
-"@arco-design/web-react@^2.55.1":
-  version "2.55.1"
-  resolved "https://registry.npmjs.org/@arco-design/web-react/-/web-react-2.55.1.tgz"
-  integrity sha512-YDwAMw7s6nUNGbIVZzKXm/yizsVBw46/LGOFb1qKJN3vL7BVv1ltt4Wzl3rHMisdpW8nrq6cw46TVL6FT8kMKg==
+"@arco-design/web-react@^2.57.0":
+  version "2.57.0"
+  resolved "https://registry.npmmirror.com/@arco-design/web-react/-/web-react-2.57.0.tgz#0f192bd4fb1e30c7c531a9aaf2489d62470bb061"
+  integrity sha512-OAPHj3j078AGonYCSgGuc/nud1y8wmg4Z96nH2fpKFP+nfGBlqVxRPXlNQLocwzjmmFAfOIoFt3P873NDpGh/w==
   dependencies:
     "@arco-design/color" "^0.4.0"
     "@babel/runtime" "^7.5.5"

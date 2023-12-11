@@ -50,7 +50,7 @@ export const articleListColumns: TableColumnProps[] = [
     width: 100,
   },
   {
-    title: '文章作者',
+    title: '文章内容',
     dataIndex: 'content',
     align: 'center',
     ellipsis: true,

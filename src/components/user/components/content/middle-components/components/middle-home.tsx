@@ -8,21 +8,38 @@ import {
 } from '@arco-design/web-react';
 import { IconDelete, IconEdit } from '@arco-design/web-react/icon';
 import { useEffect, useState } from 'react';
-import ArticleAddFrom from './article-add-form';
+import ArticleClassAddFrom from './article-class-add-form';
 import { useMyAxios } from '@/apis/intercept';
 import {
   addArticleConfig,
+  addArticleDetailConfig,
   deleteArticleConfig,
+  deleteArticleDetailConfig,
   getArticleDetailListConfig,
-  getArticleListConfig,
+  getArticleListByPageConfig,
+  updateArticleConfig,
 } from '@/apis/blog';
 import { articleClassColumns, articleListColumns } from './table-columns';
+import ArticleAddFrom from './article-add-form';
+import CustomModal from '@/components/modal';
 
 function MiddleHome() {
   const [listData, setListData] = useState<CategoryDataListOfTable[]>();
   const [articleListData, setArticleListData] =
-    useState<GetArticleDetailListData[]>();
+    useState<ArticleDetailListDataOfTable[]>();
   const [globalLoading, setGlobalLoading] = useState<boolean>(false);
+  const [categoryPagination, setCategoryPagination] = useState<PaginationProps>(
+    {
+      sizeCanChange: true,
+      showTotal: true,
+      total: 0,
+      pageSize: 5,
+      current: 1,
+      defaultPageSize: 5,
+      sizeOptions: [3, 5, 10],
+      pageSizeChangeResetCurrent: true,
+    },
+  );
   const [pagination, setPagination] = useState<PaginationProps>({
     sizeCanChange: true,
     showTotal: true,
@@ -30,10 +47,12 @@ function MiddleHome() {
     pageSize: 5,
     current: 1,
     defaultPageSize: 5,
-    sizeOptions: [5, 10, 20, 50],
+    sizeOptions: [3, 5, 10],
     pageSizeChangeResetCurrent: true,
   });
   const [arcleListLoading, setArcleListLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [editData, setEditData] = useState<CategoryDataListOfTable>();
 
   const columns: TableColumnProps[] = [
     ...articleClassColumns,
@@ -44,7 +63,7 @@ function MiddleHome() {
       render: (_, record) => (
         <Space>
           <Button
-            onClick={() => editBtn()}
+            onClick={() => editBtn(record)}
             type='primary'
             status={'success'}
             icon={<IconEdit />}
@@ -70,18 +89,25 @@ function MiddleHome() {
       title: '操作按钮',
       dataIndex: 'op',
       align: 'center',
-      render: () => (
+      render: (_, record) => (
         <Space>
           <Button type='primary' status={'success'} icon={<IconEdit />}>
             编辑
           </Button>
-          <Button type='primary' status={'danger'} icon={<IconDelete />}>
+          <Button
+            type='primary'
+            status={'danger'}
+            icon={<IconDelete />}
+            onClick={() => deleteArticleBtn(record)}
+          >
             删除
           </Button>
         </Space>
       ),
     },
   ];
+
+  /* ----------------------------------- 文章分类 ----------------------------------- */
 
   //   添加文章分类列表
   //  useMyAxios可以传递三个类型TResponse, TBody, TError，对应返回值，请求体，错误类型
@@ -91,16 +117,22 @@ function MiddleHome() {
   );
 
   // 查询文章分类列表
-  const [{ data, loading }, ListExecute] = useMyAxios<CategoryDataList>(
-    getArticleListConfig.config,
-    getArticleListConfig.options,
-  );
+  const [{ data, loading }, ListExecute] = useMyAxios<
+    CategoryDataList,
+    GetCategoryDataListByPageParams
+  >(getArticleListByPageConfig.config, getArticleListByPageConfig.options);
 
   // 删除文章分类
   const [{ loading: deletLoading }, DeleteExecute] = useMyAxios<
     BlogReturnData<string>,
     { id: number }
   >(deleteArticleConfig.config, deleteArticleConfig.options);
+
+  // 更新文章分类
+  const [{ loading: UpdateLoading }, UpdateExecute] = useMyAxios<
+    BlogReturnData<string>,
+    UpdateCategoryData
+  >(updateArticleConfig.config, updateArticleConfig.options);
 
   //  添加文章分类提交数据
   const submitData = (val: AddCategoryData) => {
@@ -111,7 +143,12 @@ function MiddleHome() {
     }).then((res) => {
       if (res && res.data.code === 0) {
         Message.success(res.data.message);
-        ListExecute();
+        ListExecute({
+          params: {
+            pageSize: categoryPagination.pageSize,
+            pageNum: categoryPagination.current,
+          },
+        });
         return;
       }
       Message.error(res.data.message ?? '操作失败');
@@ -119,11 +156,39 @@ function MiddleHome() {
   };
 
   //  编辑按钮
-  const editBtn = () => {
-    Message.info({
-      id: 'editBtn',
-      content: '暂未开放',
+  const editBtn = (recod: CategoryDataListOfTable) => {
+    setEditData(recod);
+    setIsOpen(true);
+  };
+
+  // 编辑提交数据
+  const editSubmitData = (val: UpdateCategoryData) => {
+    console.log('val', val);
+    UpdateExecute({
+      data: {
+        ...val,
+      },
+    }).then((res) => {
+      if (res && res.data.code === 0) {
+        ListExecute({
+          params: {
+            pageSize: categoryPagination.pageSize,
+            pageNum: categoryPagination.current,
+          },
+        });
+        Message.success('更新成功');
+        setTimeout(() => {
+          onClose();
+        }, 150);
+        return;
+      }
+      Message.error(res.data.message ?? '操作失败');
     });
+  };
+
+  //  关闭弹窗
+  const onClose = () => {
+    setIsOpen(false);
   };
 
   //   删除按钮
@@ -133,11 +198,44 @@ function MiddleHome() {
     }).then((res) => {
       if (res && res.data.code === 0) {
         Message.success('删除成功');
-        ListExecute();
+        ListExecute({
+          params: {
+            pageSize: categoryPagination.pageSize,
+            pageNum: categoryPagination.current,
+          },
+        });
       }
     });
   };
 
+  // 文章分类列表
+  const onChangeCategoryTable = (pagination: PaginationProps) => {
+    const { current, pageSize } = pagination;
+    ListExecute({
+      params: {
+        pageSize,
+        pageNum: current,
+      },
+    });
+    setTimeout(() => {
+      setCategoryPagination((pagination) => ({
+        ...pagination,
+        current,
+        pageSize,
+      }));
+    }, 1000);
+  };
+
+  // 根据文章分类id获取文章分类名称
+  const getCategorName = (id: number) => {
+    if (listData) {
+      const data = listData.find((item) => item.id === id);
+      if (data) return data.categoryName;
+    }
+    return '暂无分类';
+  };
+
+  /* ----------------------------------- 文章 ----------------------------------- */
   const [{ data: ArticlListData, loading: ArticlListLoading }, ArticleListRun] =
     useMyAxios<GetArticleDetailListReturnData, GetArticleDetailListParams>(
       getArticleDetailListConfig.config,
@@ -160,16 +258,67 @@ function MiddleHome() {
     }, 1000);
   };
 
+  // 删除文章
+  const [{ loading: ArticleDeleteLoading }, ArticleDelete] = useMyAxios<
+    BlogReturnData<string>,
+    { id: number }
+  >(deleteArticleDetailConfig.config, deleteArticleDetailConfig.options);
+
+  const deleteArticleBtn = (record: GetArticleDetailListData) => {
+    ArticleDelete({
+      params: {
+        id: record.id,
+      },
+    }).then((res) => {
+      if (res && res.data.code === 0) {
+        Message.success('删除成功');
+        ArticleListRun({
+          params: {
+            pageSize: pagination.pageSize,
+            pageNum: pagination.current,
+          },
+        });
+      }
+    });
+  };
+
+  // 添加文章
+  const [{ loading: ArticleAddLoading }, ArticleAdd] = useMyAxios<
+    BlogReturnData<string>,
+    AddArticleParams
+  >(addArticleDetailConfig.config, addArticleDetailConfig.options);
+
+  const submitArticleData = (val: AddArticleParams) => {
+    ArticleAdd({
+      data: {
+        ...val,
+      },
+    }).then((res) => {
+      if (res && res.data.code === 0) {
+        Message.success('添加成功');
+        ArticleListRun({
+          params: {
+            pageSize: pagination.pageSize,
+            pageNum: pagination.current,
+          },
+        });
+      }
+    });
+  };
+
+  /* -------------------------------- useEffect ------------------------------- */
   useEffect(() => {
     if (ArticlListData && ArticlListData.code === 0) {
       setPagination((pagination) => ({
         ...pagination,
         total: ArticlListData.data.total,
       }));
-      const list: GetArticleDetailListData[] = ArticlListData.data.item.map(
+      const list: ArticleDetailListDataOfTable[] = ArticlListData.data.item.map(
         (item) => {
           return {
             ...item,
+            // 根据文章分类id获取文章分类名称
+            categoryId: getCategorName(item.categoryId),
           };
         },
       );
@@ -179,8 +328,12 @@ function MiddleHome() {
 
   useEffect(() => {
     if (data && data.code === 0) {
-      if (data.data.length > 0) {
-        const list: CategoryDataListOfTable[] = data.data.map((item) => {
+      if (data.data.item.length > 0) {
+        setCategoryPagination((pagination) => ({
+          ...pagination,
+          total: data.data.total,
+        }));
+        const list: CategoryDataListOfTable[] = data.data.item.map((item) => {
           return {
             ...item,
             key: String(item.id),
@@ -201,7 +354,20 @@ function MiddleHome() {
   }, [loading, deletLoading]);
 
   useEffect(() => {
-    ListExecute();
+    if (ArticlListLoading || ArticleDeleteLoading || ArticleAddLoading)
+      setArcleListLoading(true);
+    setTimeout(() => {
+      setArcleListLoading(false);
+    }, 500);
+  }, [ArticlListLoading, ArticleDeleteLoading, ArticleAddLoading]);
+
+  useEffect(() => {
+    ListExecute({
+      params: {
+        pageSize: categoryPagination.pageSize,
+        pageNum: categoryPagination.current,
+      },
+    });
     ArticleListRun({
       params: {
         pageSize: pagination.pageSize,
@@ -209,6 +375,7 @@ function MiddleHome() {
       },
     });
   }, []);
+
   return (
     <>
       <Space
@@ -221,11 +388,11 @@ function MiddleHome() {
         <Space size={100}>
           <div>
             <h2>添加文章分类</h2>
-            <ArticleAddFrom submitData={(val) => submitData(val)} />
+            <ArticleClassAddFrom submitData={(val) => submitData(val)} />
           </div>
           <div>
             <h2>添加文章</h2>
-            <ArticleAddFrom submitData={(val) => submitData(val)} />
+            <ArticleAddFrom submitData={(val) => submitArticleData(val)} />
           </div>
         </Space>
         <h2>文章分类表格</h2>
@@ -237,16 +404,39 @@ function MiddleHome() {
           columns={columns}
           data={listData}
           loading={globalLoading}
+          pagination={categoryPagination}
+          onChange={onChangeCategoryTable}
         />
         <h2>文章列表表格</h2>
         <Table
-          loading={ArticlListLoading || arcleListLoading}
+          stripe
+          loading={arcleListLoading}
           columns={artilceListColumns}
           data={articleListData}
           pagination={pagination}
           onChange={onChangeTable}
         />
       </Space>
+
+      {/* 文章分类弹窗 */}
+      <CustomModal
+        isOpen={isOpen}
+        onClose={() => onClose()}
+        secondConfirm={true}
+        hasFooter={null}
+        title='文章分类编辑'
+        children={
+          <ArticleClassAddFrom
+            isEdit={true}
+            editSubmitData={(val) => editSubmitData(val)}
+            showCancel={true}
+            close={() => onClose()}
+            loading={UpdateLoading}
+            data={editData}
+            buttonString='确定'
+          />
+        }
+      />
     </>
   );
 }

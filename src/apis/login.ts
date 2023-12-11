@@ -1,13 +1,13 @@
-import { UseAxiosCutomConfig } from '@/typings/customConfig';
+import { UseAxiosCustomConfig } from '@/typings/customConfig';
 
 const baseURL = '/blog/user';
-const options: UseAxiosCutomConfig['options'] = {
+const options: UseAxiosCustomConfig['options'] = {
   manual: true,
 };
 
 // 登录
 
-export const loginConfig: UseAxiosCutomConfig = {
+export const loginConfig: UseAxiosCustomConfig = {
   config: {
     url: `${baseURL}/login`,
     method: 'POST',
