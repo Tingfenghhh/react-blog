@@ -41,6 +41,7 @@ export const articleListColumns: TableColumnProps[] = [
     title: '文章状态',
     dataIndex: 'state',
     align: 'center',
+    width: 90,
   },
   {
     title: '文章类别',
@@ -61,11 +62,13 @@ export const articleListColumns: TableColumnProps[] = [
     dataIndex: 'createTime',
     align: 'center',
     ellipsis: true,
+    width: 150,
   },
   {
     title: '更新时间',
     dataIndex: 'updateTime',
     align: 'center',
     ellipsis: true,
+    width: 150,
   },
 ];

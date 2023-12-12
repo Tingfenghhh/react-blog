@@ -20,7 +20,7 @@ export const RouterFatherAnimationOptions: AnimationProps = {
 export const RouterAnimationOptions: AnimationProps = {
   initial: {
     opacity: 0,
-    x: 50,
+    x: 20,
   },
   animate: {
     opacity: 1,

@@ -6,9 +6,6 @@ const HomeReactBox = styled(motion.div)`
   width: 100%;
   height: 100%;
   color: var(--color-text-1);
-  span {
-    color: var(--color-text-1);
-  }
 `;
 function HomeReact() {
   return (

@@ -379,13 +379,12 @@ function MiddleHome() {
   return (
     <>
       <Space
-        direction='vertical'
         size={10}
         style={{
           width: '100%',
         }}
       >
-        <Space size={100}>
+        <Space direction='vertical' size={10}>
           <div>
             <h2>添加文章分类</h2>
             <ArticleClassAddFrom submitData={(val) => submitData(val)} />
@@ -395,27 +394,29 @@ function MiddleHome() {
             <ArticleAddFrom submitData={(val) => submitArticleData(val)} />
           </div>
         </Space>
-        <h2>文章分类表格</h2>
-        <Table
-          style={{
-            width: '100%',
-          }}
-          stripe
-          columns={columns}
-          data={listData}
-          loading={globalLoading}
-          pagination={categoryPagination}
-          onChange={onChangeCategoryTable}
-        />
-        <h2>文章列表表格</h2>
-        <Table
-          stripe
-          loading={arcleListLoading}
-          columns={artilceListColumns}
-          data={articleListData}
-          pagination={pagination}
-          onChange={onChangeTable}
-        />
+        <div>
+          <h2>文章分类表格</h2>
+          <Table
+            style={{
+              width: '100%',
+            }}
+            stripe
+            columns={columns}
+            data={listData}
+            loading={globalLoading}
+            pagination={categoryPagination}
+            onChange={onChangeCategoryTable}
+          />
+          <h2>文章表格</h2>
+          <Table
+            stripe
+            loading={arcleListLoading}
+            columns={artilceListColumns}
+            data={articleListData}
+            pagination={pagination}
+            onChange={onChangeTable}
+          />
+        </div>
       </Space>
 
       {/* 文章分类弹窗 */}

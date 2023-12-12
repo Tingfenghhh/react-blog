@@ -18,7 +18,7 @@ const HeaderBox = styled(motion.div)`
   border-radius: var(--border-radius-xlarge);
   backdrop-filter: blur(5px);
   position: fixed;
-  top: 3px;
+  /* top: 3px; */
   left: 0;
   z-index: 999;
   &:hover {
