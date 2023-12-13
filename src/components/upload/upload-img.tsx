@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Message,
@@ -13,6 +13,8 @@ import axios from 'axios';
 
 interface UploadImgProps {
   listType: 'text' | 'picture-card' | 'picture-list';
+  returnUrl: (val: any) => void;
+  defaultValue?: UploadItem[];
   accept?:
     | string
     | {
@@ -91,7 +93,7 @@ function UploadImg(Props: UploadImgProps) {
       .then((res) => {
         if (res.data.code === 0) {
           Message.success('上传成功');
-          return onSuccess(res);
+          return onSuccess(res.data.data);
         }
         Message.error(res.data.msg);
         return onError(res);
@@ -116,6 +118,27 @@ function UploadImg(Props: UploadImgProps) {
       });
     });
   };
+
+  // 返回图片的url
+  useEffect(() => {
+    if (Props.returnUrl && fileList.length > 0) {
+      const url = fileList
+        .map((item) => {
+          if (item.url) return item.url;
+          if (item.response) return item.response;
+        })
+        .join(',');
+
+      return Props.returnUrl(url);
+    }
+    Props.returnUrl('');
+  }, [fileList]);
+
+  useEffect(() => {
+    if (Props.defaultValue) {
+      setFileList(Props.defaultValue);
+    }
+  }, []);
 
   return (
     <div

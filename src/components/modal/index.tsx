@@ -1,13 +1,16 @@
 import { Message, Modal } from '@arco-design/web-react';
 import { ReactNode } from 'react';
+import './index.less';
 
 interface CustomModalProps {
   isOpen: boolean;
   onClose: () => void;
+  confirmLoading?: boolean;
   title?: string;
   secondConfirm?: boolean;
   secondConfirmTitle?: string;
   children?: ReactNode;
+  onOk?: () => void;
   hasFooter?:
     | ReactNode
     | ((cancelButtonNode: ReactNode, okButtonNode: ReactNode) => ReactNode);
@@ -38,13 +41,14 @@ function CustomModal(Props: CustomModalProps) {
       <Modal
         title={Props.title}
         visible={Props.isOpen}
-        onOk={() => Props.onClose()}
+        onOk={() => (Props.onOk ? Props.onOk() : Props.onClose())}
         onCancel={() => cancel()}
         escToExit={false}
         maskClosable={false}
         autoFocus={false}
         footer={Props.hasFooter}
         unmountOnExit={true}
+        confirmLoading={Props.confirmLoading ?? false}
         focusLock={true}
       >
         {Props.children}

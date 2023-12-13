@@ -25,7 +25,7 @@ export const articleClassColumns: TableColumnProps[] = [
 
 export const articleListColumns: TableColumnProps[] = [
   {
-    title: 'Id',
+    title: '编号',
     dataIndex: 'id',
     align: 'center',
     width: 80,

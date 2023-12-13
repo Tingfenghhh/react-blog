@@ -1,5 +1,5 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { ConfigProvider } from '@arco-design/web-react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { ConfigProvider, Message } from '@arco-design/web-react';
 import Notfund from '@/pages/not-found';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
@@ -14,6 +14,7 @@ const Login = routes[0].component;
 
 const App = () => {
   const theme = localStorage.getItem('theme');
+  const navigate = useNavigate();
   const location = useLocation();
   // 路由切换时，进度条
   useEffect(() => {
@@ -24,6 +25,15 @@ const App = () => {
       preloaad.then(() => {
         NProgress.done();
       });
+      return;
+    }
+    const token = localStorage.getItem('Blogtoken');
+    if (!token) {
+      Message.info({
+        id: 'login',
+        content: '请先登录',
+      });
+      navigate('/');
       return;
     }
     const pathArr = path.split('/');

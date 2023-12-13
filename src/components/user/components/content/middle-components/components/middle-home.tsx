@@ -406,6 +406,7 @@ function MiddleHome() {
             loading={globalLoading}
             pagination={categoryPagination}
             onChange={onChangeCategoryTable}
+            rowKey='id'
           />
           <h2>文章表格</h2>
           <Table
@@ -415,6 +416,7 @@ function MiddleHome() {
             data={articleListData}
             pagination={pagination}
             onChange={onChangeTable}
+            rowKey='id'
           />
         </div>
       </Space>
