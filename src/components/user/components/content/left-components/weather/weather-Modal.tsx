@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Skeleton } from '@arco-design/web-react';
 import useAxios from 'axios-hooks';
 import { motion } from 'framer-motion';
-import { WeatherSpan } from './style';
+import { WeatherSpan } from '../style';
 import { IconLocation } from '@arco-design/web-react/icon';
 import WeatherIcon from '@/components/icon-components/WeatherSvg';
 import dayjs from 'dayjs';

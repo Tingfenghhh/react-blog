@@ -3,9 +3,9 @@ import { useAppSelector } from '@/hooks/redux';
 import { useGetLocation } from '@/hooks/useGetLocation';
 import useAxios from 'axios-hooks';
 import { useEffect, useState } from 'react';
-import './index.less';
+import '../index.less';
 import { Modal, Skeleton } from '@arco-design/web-react';
-import { WeatherSpan } from './style';
+import { WeatherSpan } from '../style';
 import { IconLocation } from '@arco-design/web-react/icon';
 import { Variants, motion } from 'framer-motion';
 import WeatherModal7 from './weather-Modal';
@@ -18,7 +18,7 @@ const {
   VITE_API_WEATHER_URL,
 } = import.meta.env;
 
-function Wether() {
+function Weather() {
   const { getIp, getCity } = useGetLocation();
   const [cityName, setCityName] = useState('');
   const [cityId, setCityId] = useState('');
@@ -183,4 +183,4 @@ function Wether() {
   );
 }
 
-export default Wether;
+export default Weather;

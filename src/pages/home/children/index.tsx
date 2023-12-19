@@ -1,4 +1,4 @@
-import MiddleHome from '@/components/user/components/content/middle-components/components/middle-home';
+import MiddleHome from '@/components/user/components/content/middle-components/components/middle-home/middle-home';
 import { RouterAnimationOptions } from '@/pages/router-animation-options';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';

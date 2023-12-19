@@ -11,10 +11,34 @@ import MyCropper from './cropper';
 import axiosInstance from '@/apis/intercept';
 import axios from 'axios';
 
+/**
+ * @interface UploadImgProps
+ * @description UploadImg组件的属性接口
+ * @property {'text' | 'picture-card' | 'picture-list'} listType - 列表类型
+ * @property {(val: any) => void} returnUrl - 返回图片地址的回调函数
+ * @property {UploadItem[]} [defaultValue] - 默认值
+ * @property {string | { type: string; strict?: boolean }} [accept] - 接受的文件类型
+ * @property {number} [limit] - 限制上传数量
+ * @property {Partial<ProgressProps>} [progressProps] - 进度条属性
+ *
+ */
 interface UploadImgProps {
+  /**
+   * 列表类型
+   */
   listType: 'text' | 'picture-card' | 'picture-list';
+  /**
+   * 返回图片地址的回调函数
+   * @param val 图片地址
+   */
   returnUrl: (val: any) => void;
+  /**
+   * 默认值
+   */
   defaultValue?: UploadItem[];
+  /**
+   * 接受的文件类型
+   */
   accept?:
     | string
     | {
@@ -22,7 +46,13 @@ interface UploadImgProps {
         strict?: boolean | undefined;
       }
     | undefined;
+  /**
+   * 限制上传数量
+   */
   limit?: number;
+  /**
+   * 进度条属性
+   */
   progressProps?: Partial<ProgressProps>;
 }
 

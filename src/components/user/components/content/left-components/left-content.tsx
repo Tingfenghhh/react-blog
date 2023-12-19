@@ -1,5 +1,5 @@
-import UserInfo from './user-info';
-import Wether from './wether';
+import UserInfo from './userinfo/user-info';
+import Weather from './weather/wether';
 import { LeftBox } from '../style';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/hooks/redux';
@@ -21,7 +21,7 @@ function LeftContent({ show }: { show?: boolean }) {
         backgroundImage: `url(${backImg})`,
       }}
     >
-      <Wether />
+      <Weather />
       <UserInfo />
     </LeftBox>
   );

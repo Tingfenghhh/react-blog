@@ -2,15 +2,45 @@ import { Message, Modal } from '@arco-design/web-react';
 import { ReactNode } from 'react';
 import './index.less';
 
+/**
+ * 自定义模态框属性
+ */
 interface CustomModalProps {
+  /**
+   * 是否打开模态框
+   */
   isOpen: boolean;
+  /**
+   * 关闭模态框的回调函数
+   */
   onClose: () => void;
+  /**
+   * 确认按钮加载状态
+   */
   confirmLoading?: boolean;
+  /**
+   * 模态框标题
+   */
   title?: string;
+  /**
+   * 是否显示第二个确认按钮
+   */
   secondConfirm?: boolean;
+  /**
+   * 第二个确认按钮的标题
+   */
   secondConfirmTitle?: string;
+  /**
+   * 子元素
+   */
   children?: ReactNode;
+  /**
+   * 确认按钮的回调函数
+   */
   onOk?: () => void;
+  /**
+   * 是否显示底部
+   */
   hasFooter?:
     | ReactNode
     | ((cancelButtonNode: ReactNode, okButtonNode: ReactNode) => ReactNode);
