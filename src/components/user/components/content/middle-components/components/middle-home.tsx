@@ -2,6 +2,7 @@ import {
   Button,
   Message,
   PaginationProps,
+  Popconfirm,
   Space,
   Table,
   TableColumnProps,
@@ -60,6 +61,7 @@ function MiddleHome() {
       title: '操作按钮',
       dataIndex: 'op',
       align: 'center',
+      width: 250,
       render: (_, record) => (
         <Space>
           <Button
@@ -70,14 +72,23 @@ function MiddleHome() {
           >
             编辑
           </Button>
-          <Button
-            onClick={() => deleteBtn(record)}
-            type='primary'
-            status={'danger'}
-            icon={<IconDelete />}
+          <Popconfirm
+            focusLock
+            title='警告'
+            content='删除该分类，会删除所有属于该分类的文章，是否删除?'
+            onOk={() => {
+              deleteBtn(record);
+            }}
+            onCancel={() => {
+              Message.error({
+                content: '取消删除',
+              });
+            }}
           >
-            删除
-          </Button>
+            <Button type='primary' status={'danger'} icon={<IconDelete />}>
+              删除
+            </Button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -89,6 +100,7 @@ function MiddleHome() {
       title: '操作按钮',
       dataIndex: 'op',
       align: 'center',
+      width: 250,
       render: (_, record) => (
         <Space>
           <Button type='primary' status={'success'} icon={<IconEdit />}>
@@ -179,6 +191,12 @@ function MiddleHome() {
         Message.success('更新成功');
         setTimeout(() => {
           onClose();
+          ArticleListRun({
+            params: {
+              pageSize: pagination.pageSize,
+              pageNum: pagination.current,
+            },
+          });
         }, 150);
         return;
       }
@@ -202,6 +220,12 @@ function MiddleHome() {
           params: {
             pageSize: categoryPagination.pageSize,
             pageNum: categoryPagination.current,
+          },
+        });
+        ArticleListRun({
+          params: {
+            pageSize: pagination.pageSize,
+            pageNum: pagination.current,
           },
         });
       }
@@ -380,6 +404,7 @@ function MiddleHome() {
     <>
       <Space
         size={10}
+        direction='vertical'
         style={{
           width: '100%',
         }}
@@ -397,9 +422,6 @@ function MiddleHome() {
         <div>
           <h2>文章分类表格</h2>
           <Table
-            style={{
-              width: '100%',
-            }}
             stripe
             columns={columns}
             data={listData}
