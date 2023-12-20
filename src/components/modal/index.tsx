@@ -4,6 +4,34 @@ import './index.less';
 
 /**
  * 自定义模态框属性
+ * @interface CustomModalProps
+ * @description 自定义模态框属性
+ * @property {boolean} isOpen - 是否打开模态框
+ * @property {() => void} onClose - 关闭模态框的回调函数
+ * @property {boolean} [confirmLoading] - 确认按钮加载状态
+ * @property {string} [title] - 模态框标题
+ * @property {boolean} [secondConfirm] - 是否显示第二个确认按钮
+ * @property {string} [secondConfirmTitle] - 第二个确认按钮的标题
+ * @property {ReactNode} [children] - 子元素
+ * @property {() => void} [onOk] - 确认按钮的回调函数
+ * @property {ReactNode | ((cancelButtonNode: ReactNode, okButtonNode: ReactNode) => ReactNode)} [hasFooter] - 是否显示底部
+ *
+ * @example
+ * <CustomModal
+ *    title='编辑个人资料'
+ *    secondConfirm={true}
+ *    secondConfirmTitle='是否退出编辑'
+ *    isOpen={isOpen}
+ *    confirmLoading={editUserLoading}
+ *    children={EditUserInfo({
+ *      userData: userInfo,
+ *      isValidate: (val: boolean) => checkValidate(val),
+ *      returnData: (val: FormData & { imgUrl: string }) =>
+ *        saveUserInfoData(val),
+ *    })}
+ *    onClose={() => setIsOpen(false)}
+ *    onOk={() => ok()}
+ * />
  */
 interface CustomModalProps {
   /**

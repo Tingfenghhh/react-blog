@@ -8,6 +8,16 @@ const WeatherIconMotion = styled(motion.i)`
   color: var(--color-text-1);
 `;
 
+/**
+ *
+ * @param {string} iconId - 图标id
+ * @param {boolean} [fill] - 是否填充
+ * @description 天气图标组件
+ * @example
+ *    <WeatherIcon iconId={iconId} fill={true} />
+ * @returns
+ */
+
 function WeatherIcon({ iconId, fill }: { iconId: string; fill?: boolean }) {
   if (!iconId) return null;
   const className = `qi-${iconId}${fill ? '-fill' : ''}`;

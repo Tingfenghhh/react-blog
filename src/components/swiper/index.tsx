@@ -13,6 +13,40 @@ import 'swiper/css';
  * @property {string} [swiperClassName] - 轮播组件的类名
  * @property {SwiperProps} [swiperOptions] - 轮播组件的配置选项
  * @property {MotionProps} [motionSwiperOptions] - Motion动画组件的配置选项
+ *
+ * @example
+ *        <MotionSwiper
+ *                className={'img-motion-swipe'}
+ *                swiperClassName={'img-swiper'}
+ *                swiperOptions={{
+ *                  modules: [Autoplay, Pagination, EffectCards],
+ *                  pagination: {
+ *                    clickable: true,
+ *                  },
+ *                  autoplay: {
+ *                    delay: 10000,
+ *                    disableOnInteraction: false,
+ *                    pauseOnMouseEnter: true,
+ *                  },
+ *                  effect: 'cards',
+ *                  onActiveIndexChange: swiper,
+ *                }}
+ *                swiperContent={swiperContent}
+ *                motionSwiperOptions={{
+ *                  initial: {
+ *                    opacity: 0,
+ *                    y: 20,
+ *                  },
+ *                  animate: isLight === 'light' ? 'light' : 'dark',
+ *                  variants: variants,
+ *                  transition: {
+ *                    duration: 0.5,
+ *                    delay: 1.5,
+ *                    ease: [0.29, -0.18, 0.37, 1.01],
+ *                  },
+ *                }}
+ *              />
+ *
  */
 interface MotionSwiperPorps {
   swiperContent: JSX.Element | JSX.Element[];
