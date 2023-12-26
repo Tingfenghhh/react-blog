@@ -45,7 +45,7 @@ function LottieAnimation(LottieAnimationProps: LottieAnimationProps) {
       autoplay: autoplay ?? true, // 是否自动播放
       animationData: animationData, // 动画数据
     });
-    if (speed) lottie.setSpeed(speed);
+    if (speed) lottie.setSpeed(speed, name);
   }, [animationData]);
 
   // 组件卸载时销毁动画
