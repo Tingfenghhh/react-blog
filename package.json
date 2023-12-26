@@ -24,6 +24,7 @@
     "dayjs": "^1.11.10",
     "framer-motion": "^10.16.5",
     "less": "^4.2.0",
+    "lottie-web": "^5.12.2",
     "nprogress": "^0.2.0",
     "qweather-icons": "^1.6.0",
     "react": "^18.2.0",

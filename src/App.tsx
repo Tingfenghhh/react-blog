@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import routes from './router';
-import LoadingSpin from './pages/loding';
+import LoadingSpin from './pages/loading';
 
 const Login = routes[0].component;
 
