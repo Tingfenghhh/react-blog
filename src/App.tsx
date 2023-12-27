@@ -9,6 +9,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import routes from './router';
 import LoadingSpin from './pages/loading';
+import CustomCursor from './components/customCursor';
 
 const Login = routes[0].component;
 
@@ -76,79 +77,82 @@ const App = () => {
     document.body.removeAttribute('arco-theme');
   }, [theme]);
   return (
-    <ConfigProvider
-      componentConfig={{
-        Button: {
-          shape: 'square',
-          style: {
-            borderRadius: '5px',
+    <div style={{ overflow: 'hidden', position: 'relative' }}>
+      <ConfigProvider
+        componentConfig={{
+          Button: {
+            shape: 'square',
+            style: {
+              borderRadius: '5px',
+            },
           },
-        },
-        Card: {
-          bordered: false,
-        },
-        List: {
-          bordered: false,
-        },
-        Table: {
-          border: false,
-        },
-      }}
-    >
-      <Provider store={store}>
-        <AnimatePresence mode='wait'>
-          <Routes location={location}>
-            {routes &&
-              routes.map((route) => {
-                const Component = route.component;
-                return (
-                  <Route
-                    key={`/${route.key}`}
-                    path={`/${route.key}`}
-                    element={
-                      <Suspense fallback={<LoadingSpin />}>
-                        <Component />
-                      </Suspense>
-                    }
-                  >
-                    {route.children &&
-                      route.children.map((child) => {
-                        const ChildComponent = child.component;
-                        return (
-                          <Route
-                            key={`/${route.key}/${child.key}`}
-                            path={`/${route.key}/${child.key}`}
-                            element={
-                              <Suspense fallback={<LoadingSpin />}>
-                                <ChildComponent />
-                              </Suspense>
-                            }
-                          />
-                        );
-                      })}
-                  </Route>
-                );
-              })}
-            <Route
-              path='/'
-              element={
-                <Suspense fallback={<LoadingSpin />}>
-                  <Login />
-                </Suspense>
-              }
-            />
-            <Route
-              path='*'
-              element={
-                <Suspense fallback={<LoadingSpin />}>
-                  <Notfund />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </AnimatePresence>
-      </Provider>
-    </ConfigProvider>
+          Card: {
+            bordered: false,
+          },
+          List: {
+            bordered: false,
+          },
+          Table: {
+            border: false,
+          },
+        }}
+      >
+        <Provider store={store}>
+          <AnimatePresence mode='wait'>
+            <Routes location={location}>
+              {routes &&
+                routes.map((route) => {
+                  const Component = route.component;
+                  return (
+                    <Route
+                      key={`/${route.key}`}
+                      path={`/${route.key}`}
+                      element={
+                        <Suspense fallback={<LoadingSpin />}>
+                          <Component />
+                        </Suspense>
+                      }
+                    >
+                      {route.children &&
+                        route.children.map((child) => {
+                          const ChildComponent = child.component;
+                          return (
+                            <Route
+                              key={`/${route.key}/${child.key}`}
+                              path={`/${route.key}/${child.key}`}
+                              element={
+                                <Suspense fallback={<LoadingSpin />}>
+                                  <ChildComponent />
+                                </Suspense>
+                              }
+                            />
+                          );
+                        })}
+                    </Route>
+                  );
+                })}
+              <Route
+                path='/'
+                element={
+                  <Suspense fallback={<LoadingSpin />}>
+                    <Login />
+                  </Suspense>
+                }
+              />
+              <Route
+                path='*'
+                element={
+                  <Suspense fallback={<LoadingSpin />}>
+                    <Notfund />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </Provider>
+      </ConfigProvider>
+      <CustomCursor />
+    </div>
   );
 };
 

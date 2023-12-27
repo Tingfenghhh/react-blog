@@ -103,6 +103,7 @@ function LoginForm() {
           animationData={Fireworks}
           name={'Fireworks'}
           speed={1.5}
+          autoplay={false}
           loop={false}
           left={FireworksX - 50}
           top={FireworksY - 50}
