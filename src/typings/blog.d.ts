@@ -68,11 +68,8 @@ interface GetArticleDetailListData {
   updateTime: string;
 }
 
-type ArticleDetailListDataOfTable = Omit<
-  GetArticleDetailListData,
-  'categoryId'
-> & {
-  categoryId: string;
+type ArticleDetailListDataOfTable = GetArticleDetailListData & {
+  categoryIdString: string;
 };
 
 type GetArticleDetailListReturnData = BlogReturnData<{
@@ -89,4 +86,9 @@ interface AddArticleParams {
   coverImg: string;
   state: string;
   categoryId: number;
+}
+
+// 更新文章参数
+interface UpdateArticleParams extends AddArticleParams {
+  id: number;
 }

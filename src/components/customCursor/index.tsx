@@ -13,7 +13,6 @@ function CustomCursor() {
     const updateMousePosition = (e: MouseEvent) => {
       lastMousePosition = { x: e.pageX, y: e.pageY };
       setPosition(lastMousePosition);
-      console.log('updateMousePosition');
     };
 
     const updatePositionOnScroll = () => {

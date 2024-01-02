@@ -1,34 +1,19 @@
-import { UseAxiosCustomConfig } from '@/typings/customConfig';
+import { createConfig } from './createConfig';
 
 const baseURL = '/blog/user';
-const options: UseAxiosCustomConfig['options'] = {
-  manual: true,
-};
 
 // 获取用户信息
-export const getUserInfoConfig: UseAxiosCustomConfig = {
-  config: {
-    url: `${baseURL}/getUserInfo`,
-    method: 'GET',
-  },
-  options,
-};
+export const getUserInfoConfig = createConfig(`${baseURL}/getUserInfo`, 'GET');
 
 // 更新用户头像
-export const updateAvatarConfig: UseAxiosCustomConfig = {
-  config: {
-    url: `${baseURL}/updateAvatar`,
-    method: 'PATCH',
-  },
-  options,
-};
+export const updateAvatarConfig = createConfig(
+  `${baseURL}/updateAvatar`,
+  'PATCH',
+);
 
 // 更新用户信息
 
-export const updateUserInfoConfig: UseAxiosCustomConfig = {
-  config: {
-    url: `${baseURL}/updateUser`,
-    method: 'PUT',
-  },
-  options,
-};
+export const updateUserInfoConfig = createConfig(
+  `${baseURL}/updateUser`,
+  'PUT',
+);

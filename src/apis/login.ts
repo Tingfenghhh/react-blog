@@ -1,19 +1,10 @@
-import { UseAxiosCustomConfig } from '@/typings/customConfig';
+import { createConfig } from './createConfig';
 
 const baseURL = '/blog/user';
-const options: UseAxiosCustomConfig['options'] = {
-  manual: true,
-};
 
 // 登录
-
-export const loginConfig: UseAxiosCustomConfig = {
-  config: {
-    url: `${baseURL}/login`,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
+export const loginConfig = createConfig(`${baseURL}/login`, 'POST', {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
   },
-  options,
-};
+});

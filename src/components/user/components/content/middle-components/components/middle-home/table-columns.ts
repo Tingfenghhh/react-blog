@@ -55,7 +55,7 @@ export const articleListColumns: TableColumnProps[] = [
   },
   {
     title: '文章类别',
-    dataIndex: 'categoryId',
+    dataIndex: 'categoryIdString',
     align: 'center',
     ellipsis: true,
     width: 100,

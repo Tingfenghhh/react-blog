@@ -19,6 +19,7 @@ import {
   getArticleDetailListConfig,
   getArticleListByPageConfig,
   updateArticleConfig,
+  updateArticleDetailConfig,
 } from '@/apis/blog';
 import { articleClassColumns, articleListColumns } from './table-columns';
 import ArticleAddFrom from './article-add-form';
@@ -103,7 +104,12 @@ function MiddleHome() {
       width: 250,
       render: (_, record) => (
         <Space>
-          <Button type='primary' status={'success'} icon={<IconEdit />}>
+          <Button
+            type='primary'
+            status={'success'}
+            icon={<IconEdit />}
+            onClick={() => editArticle(record)}
+          >
             编辑
           </Button>
           <Button
@@ -330,6 +336,53 @@ function MiddleHome() {
     });
   };
 
+  // 编辑文章
+
+  const [isArticleOpen, setIsArticleOpen] = useState(false);
+  const [artcileEditData, setArtcileEditData] =
+    useState<ArticleDetailListDataOfTable>();
+
+  const onArticleClose = () => {
+    setIsArticleOpen(false);
+  };
+
+  const editArticle = (record: ArticleDetailListDataOfTable) => {
+    console.log('record', record);
+    if (record.id) {
+      setArtcileEditData(record);
+      setIsArticleOpen(true);
+    }
+  };
+
+  const [{ loading: ArticleEditLoading }, ArticleEdit] = useMyAxios<
+    BlogReturnData<string>,
+    UpdateArticleParams
+  >(updateArticleDetailConfig.config, updateArticleDetailConfig.options);
+
+  const editArticleSubmitData = (val: UpdateArticleParams) => {
+    console.log('val', val);
+    ArticleEdit({
+      data: {
+        ...val,
+      },
+    }).then((res) => {
+      if (res && res.data.code === 0) {
+        Message.success('更新成功');
+        ArticleListRun({
+          params: {
+            pageSize: pagination.pageSize,
+            pageNum: pagination.current,
+          },
+        });
+        setTimeout(() => {
+          onArticleClose();
+        }, 150);
+        return;
+      }
+      Message.error(res.data.message ?? '操作失败');
+    });
+  };
+
   /* -------------------------------- useEffect ------------------------------- */
   useEffect(() => {
     if (ArticlListData && ArticlListData.code === 0) {
@@ -342,7 +395,7 @@ function MiddleHome() {
           return {
             ...item,
             // 根据文章分类id获取文章分类名称
-            categoryId: getCategorName(item.categoryId),
+            categoryIdString: getCategorName(item.categoryId),
           };
         },
       );
@@ -378,12 +431,22 @@ function MiddleHome() {
   }, [loading, deletLoading]);
 
   useEffect(() => {
-    if (ArticlListLoading || ArticleDeleteLoading || ArticleAddLoading)
+    if (
+      ArticlListLoading ||
+      ArticleDeleteLoading ||
+      ArticleAddLoading ||
+      ArticleEditLoading
+    )
       setArcleListLoading(true);
     setTimeout(() => {
       setArcleListLoading(false);
     }, 500);
-  }, [ArticlListLoading, ArticleDeleteLoading, ArticleAddLoading]);
+  }, [
+    ArticlListLoading,
+    ArticleDeleteLoading,
+    ArticleAddLoading,
+    ArticleEditLoading,
+  ]);
 
   useEffect(() => {
     ListExecute({
@@ -459,6 +522,25 @@ function MiddleHome() {
             loading={UpdateLoading}
             data={editData}
             buttonString='确定'
+          />
+        }
+      />
+
+      {/* 文章详情编辑弹窗 */}
+      <CustomModal
+        isOpen={isArticleOpen}
+        onClose={() => onArticleClose()}
+        secondConfirm={true}
+        hasFooter={null}
+        title='文章详情编辑'
+        children={
+          <ArticleAddFrom
+            isEdit={true}
+            close={() => onArticleClose()}
+            data={artcileEditData}
+            showCancel={true}
+            buttonString='确定'
+            editSubmitData={(val) => editArticleSubmitData(val)}
           />
         }
       />

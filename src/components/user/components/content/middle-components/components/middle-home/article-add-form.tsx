@@ -1,12 +1,27 @@
 import { getArticleListConfig } from '@/apis/blog';
 import { useMyAxios } from '@/apis/intercept';
-import { Form, Input, Button, Select } from '@arco-design/web-react';
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  Space,
+  Modal,
+  Message,
+} from '@arco-design/web-react';
 import { useEffect, useState } from 'react';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 interface ArticleAddFromProps {
-  submitData: (data: AddArticleParams) => void;
+  submitData?: (data: AddArticleParams) => void;
+  editSubmitData?: (data: UpdateArticleParams) => void;
+  isEdit?: boolean;
+  data?: ArticleDetailListDataOfTable;
+  showCancel?: boolean;
+  buttonString?: string;
+  close?: () => void;
+  loading?: boolean;
 }
 
 interface ArticleClassOptionsList {
@@ -14,7 +29,7 @@ interface ArticleClassOptionsList {
   value: number;
 }
 
-function ArticleAddFrom(ArticleAddFromProps: ArticleAddFromProps) {
+function ArticleAddFrom(Props: ArticleAddFromProps) {
   const stateOptions = ['草稿', '已发布'];
   // 文章分类列表
   const [articleClassOptionsList, setArticleClassOptionsList] =
@@ -25,8 +40,32 @@ function ArticleAddFrom(ArticleAddFromProps: ArticleAddFromProps) {
   >(getArticleListConfig.config, getArticleListConfig.options);
 
   const submitData = (values: AddArticleParams) => {
-    ArticleAddFromProps.submitData({
+    if (Props.isEdit && Props.editSubmitData && Props.data) {
+      Props.editSubmitData({
+        id: Props.data.id,
+        title: values.title,
+        content: values.content,
+        coverImg: values.coverImg,
+        state: values.state,
+        categoryId: values.categoryId,
+      });
+      return;
+    }
+    if (!Props.submitData) return;
+    Props.submitData({
       ...values,
+    });
+  };
+
+  const cancle = () => {
+    Modal.confirm({
+      title: '确定要取消编辑吗？',
+      onOk: () => {
+        Props.close && Props.close();
+      },
+      onCancel: () => {
+        Message.info('已取消');
+      },
     });
   };
 
@@ -51,7 +90,12 @@ function ArticleAddFrom(ArticleAddFromProps: ArticleAddFromProps) {
       layout={'vertical'}
       requiredSymbol={false}
       initialValues={{
-        state: '草稿',
+        title: Props.data?.title ?? '',
+        content: Props.data?.content ?? '',
+        coverImg: Props.data?.coverImg ?? '',
+        state: Props.data?.state ?? '草稿',
+        // 根据文章分类名称获取文章分类id
+        categoryId: Props.data?.categoryId,
       }}
       onSubmit={(values: AddArticleParams) => submitData(values)}
     >
@@ -137,10 +181,21 @@ function ArticleAddFrom(ArticleAddFromProps: ArticleAddFromProps) {
           ))}
         </Select>
       </FormItem>
-      <FormItem>
-        <Button type='primary' htmlType='submit'>
-          添加
-        </Button>
+      <FormItem
+        wrapperCol={{
+          offset: Props.showCancel ? 8 : 0,
+        }}
+      >
+        <Space size={20}>
+          {Props.showCancel && (
+            <Button type='outline' onClick={() => cancle()}>
+              取消
+            </Button>
+          )}
+          <Button type='primary' htmlType='submit' loading={Props.loading}>
+            {Props.buttonString ?? '添加'}
+          </Button>
+        </Space>
       </FormItem>
     </Form>
   );
