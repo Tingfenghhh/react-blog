@@ -1,3 +1,4 @@
+import ReactHome from '@/components/user/components/content/middle-components/components/react-home';
 import { RouterAnimationOptions } from '@/pages/router-animation-options';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -10,7 +11,7 @@ const HomeReactBox = styled(motion.div)`
 function HomeReact() {
   return (
     <HomeReactBox {...RouterAnimationOptions}>
-      <span>HomeReactBox</span>
+      <ReactHome />
     </HomeReactBox>
   );
 }
