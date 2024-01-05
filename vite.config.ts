@@ -1,10 +1,17 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
+import cesium from 'vite-plugin-cesium';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    cesium({
+      devMinifyCesium: true,
+      rebuildCesium: true,
+    }),
+  ],
   server: {
     host: '0.0.0.0', // 指定监听的IP地址
     port: 3333, // 指定服务器端口

@@ -1,3 +1,4 @@
+import Other from '@/components/user/components/content/middle-components/components/other/t-cesium';
 import { RouterAnimationOptions } from '@/pages/router-animation-options';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -11,7 +12,7 @@ const HomeOtherBox = styled(motion.div)`
 function HomeOther() {
   return (
     <HomeOtherBox {...RouterAnimationOptions}>
-      <span>HomeOtherBox</span>
+      <Other />
     </HomeOtherBox>
   );
 }
